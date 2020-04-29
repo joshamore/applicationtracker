@@ -1,12 +1,14 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import "./App.css";
+import { Home } from "./components/routes/Home";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Application Tracker</h1> 
-    </div>
-  );
+	return (
+		<BrowserRouter>
+			<Route path="/" component={Home} />
+		</BrowserRouter>
+	);
 }
 
 export default App;
