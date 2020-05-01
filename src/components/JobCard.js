@@ -19,8 +19,10 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function JobCard() {
+export default function JobCard(props) {
 	const classes = useStyles();
+
+	const { jobTitle, company } = props;
 
 	return (
 		<Card className={classes.root}>
@@ -33,10 +35,10 @@ export default function JobCard() {
 					Application
 				</Typography>
 				<Typography variant="h5" component="h2">
-					JOB TITLE #TODO
+					{jobTitle}
 				</Typography>
 				<Typography className={classes.pos} color="textSecondary">
-					Company Name #TODO
+					{company}
 				</Typography>
 			</CardContent>
 			<CardActions>
