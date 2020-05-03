@@ -3,6 +3,7 @@ import Container from "@material-ui/core/Container";
 import { Grid } from "@material-ui/core";
 import Appbar from "../Appbar";
 import JobCard from "../JobCard";
+import Spinner from "../Spinner";
 
 export class Dashboard extends React.Component {
 	state = {
@@ -48,7 +49,7 @@ export class Dashboard extends React.Component {
 				<Container maxWidth={false}>
 					<h1>Welcome to the Dashboard</h1>
 					{this.state.gettingJobs ? (
-						<p>Loading....</p>
+						<Spinner />
 					) : (
 						<Grid container>
 							{this.state.jobApplications.map((application) => (
