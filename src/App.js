@@ -4,12 +4,14 @@ import "./App.css";
 import { Home } from "./components/routes/Home";
 import { Dashboard } from "./components/routes/Dashboard";
 import { Add } from "./components/routes/Add";
+import { Job } from "./components/routes/Job";
 
 function App() {
 	return (
 		<BrowserRouter>
 			<Route exact path="/" component={Home} />
 			<Route exact path="/Dashboard" component={Dashboard} />
+			<Route exact path="/Job" component={Job} />
 			<Route exact path="/Add" component={Add} />
 		</BrowserRouter>
 	);

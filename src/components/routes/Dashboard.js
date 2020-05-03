@@ -20,21 +20,25 @@ export class Dashboard extends React.Component {
 						id: 1,
 						jobTitle: "JS Engineer",
 						company: "ABC Startup",
+						link: "https://example.com",
 					},
 					{
 						id: 2,
 						jobTitle: "FrontEnd Engineer",
 						company: "ABC Corp.",
+						link: "https://example.com",
 					},
 					{
 						id: 33,
 						jobTitle: "Rails Dev",
 						company: "XYZ Startup",
+						link: "https://example.com",
 					},
 					{
 						id: 78,
 						jobTitle: "COBAL Engineer",
 						company: "1944 Company",
+						link: "https://example.com",
 					},
 				],
 				gettingJobs: false,
@@ -57,6 +61,7 @@ export class Dashboard extends React.Component {
 									<JobCard
 										jobTitle={application.jobTitle}
 										company={application.company}
+										id={application.id}
 									/>
 								</Grid>
 							))}
