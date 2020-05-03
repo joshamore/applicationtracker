@@ -5,7 +5,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
 	root: {
@@ -22,6 +22,9 @@ const useStyles = makeStyles({
 
 export default function JobCard(props) {
 	const classes = useStyles();
+
+	const history = useHistory();
+	const toJob = () => history.push("/job");
 
 	const { jobTitle, company, id } = props;
 
@@ -44,11 +47,15 @@ export default function JobCard(props) {
 			</CardContent>
 			<CardActions>
 				{/* TODO: The redirect will route to the specific job when backend up */}
-				<Link to={"/job"}>
-					<Button size="small" color="primary">
-						Add Update
-					</Button>
-				</Link>
+
+				<Button
+					size="small"
+					color="primary"
+					variant="contained"
+					onClick={toJob}
+				>
+					Add Update
+				</Button>
 			</CardActions>
 		</Card>
 	);
