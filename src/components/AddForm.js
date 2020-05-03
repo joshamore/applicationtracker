@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function AddForm() {
+export default function AddForm({ addApplication }) {
 	const classes = useStyles();
 
 	// Storing state of form using hooks
@@ -44,7 +44,18 @@ export default function AddForm() {
 						onChange={(e) => setjobLink(e.target.value)}
 					/>
 					<br />
-					<Button id="addApplication" variant="contained" color="primary">
+					<Button
+						id="addApplication"
+						variant="contained"
+						color="primary"
+						onClick={(e) => {
+							addApplication({
+								jobTitle: jobTitle,
+								jobCompany: jobCompany,
+								jobLink: jobLink,
+							});
+						}}
+					>
 						Add Application
 					</Button>
 				</form>
