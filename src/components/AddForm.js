@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -20,6 +21,9 @@ export default function AddForm({ addApplication }) {
 	const [jobTitle, setjobTitle] = useState("");
 	const [jobCompany, setjobCompany] = useState("");
 	const [jobLink, setjobLink] = useState("");
+
+	// Hook used for redirect
+	let history = useHistory();
 
 	return (
 		<div>
@@ -49,11 +53,15 @@ export default function AddForm({ addApplication }) {
 						variant="contained"
 						color="primary"
 						onClick={(e) => {
+							// Passing job application data to parent component
 							addApplication({
 								jobTitle: jobTitle,
 								jobCompany: jobCompany,
 								jobLink: jobLink,
 							});
+
+							// Redirecting to dashboard
+							history.push("/dashboard");
 						}}
 					>
 						Add Application
