@@ -2,6 +2,7 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import LinearLoader from "../LinearLoader";
 import Appbar from "../Appbar";
+import Button from "@material-ui/core/Button";
 
 export class Job extends React.Component {
 	state = {
@@ -15,7 +16,7 @@ export class Job extends React.Component {
 				jobTitle: "COBAL Engineer",
 				jobCompany: "Old Co.",
 				jobLink: "https://example.com/OLD",
-				loading: false,
+				loadingJob: false,
 			});
 		}, 3000);
 	}
@@ -31,6 +32,12 @@ export class Job extends React.Component {
 						<h1>{this.state.jobTitle}</h1>
 						<h2>{this.state.jobCompany}</h2>
 						<a href={this.state.jobLink}>Job Ad</a>
+
+						<div>
+							<Button variant="contained" color="primary">
+								Edit
+							</Button>
+						</div>
 					</Container>
 				)}
 			</div>
