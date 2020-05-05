@@ -22,8 +22,10 @@ const useStyles = makeStyles({
 
 export default function JobCard(props) {
 	const classes = useStyles();
-
 	const history = useHistory();
+
+	// Redirect to job page
+	// TODO: Will need to take ID when backend exists
 	const toJob = () => history.push("/job");
 
 	const { jobTitle, company, id } = props;
