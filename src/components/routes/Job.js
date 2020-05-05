@@ -2,7 +2,7 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import LinearLoader from "../LinearLoader";
 import Appbar from "../Appbar";
-import Button from "@material-ui/core/Button";
+import EditDialogue from "../JobEditDialogue";
 
 export class Job extends React.Component {
 	state = {
@@ -33,11 +33,7 @@ export class Job extends React.Component {
 						<h2>{this.state.jobCompany}</h2>
 						<a href={this.state.jobLink}>Job Ad</a>
 
-						<div>
-							<Button variant="contained" color="primary">
-								Edit
-							</Button>
-						</div>
+						<EditDialogue />
 					</Container>
 				)}
 			</div>
