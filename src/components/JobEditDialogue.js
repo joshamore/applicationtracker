@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -7,8 +7,11 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-export default function JobEditDialogue() {
-	const [open, setOpen] = React.useState(false);
+export default function JobEditDialogue({ jobUpdate }) {
+	const [open, setOpen] = useState(false);
+	const [jobTitle, setjobTitle] = useState("");
+	const [jobCompany, setjobCompany] = useState("");
+	const [jobLink, setjobLink] = useState("");
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -16,6 +19,15 @@ export default function JobEditDialogue() {
 
 	const handleClose = () => {
 		setOpen(false);
+	};
+
+	const updateJob = () => {
+		setOpen(false);
+		jobUpdate({
+			jobTitle: jobTitle,
+			jobCompany: jobCompany,
+			jobLink: jobLink,
+		});
 	};
 
 	return (
@@ -37,6 +49,8 @@ export default function JobEditDialogue() {
 						id="jobTitle"
 						label="Job Title"
 						type="text"
+						value={jobTitle}
+						onChange={(e) => setjobTitle(e.target.value)}
 						fullWidth
 					/>
 					<TextField
@@ -45,6 +59,8 @@ export default function JobEditDialogue() {
 						label="Company"
 						type="text"
 						fullWidth
+						value={jobCompany}
+						onChange={(e) => setjobCompany(e.target.value)}
 					/>
 					<TextField
 						margin="dense"
@@ -52,14 +68,16 @@ export default function JobEditDialogue() {
 						label="Link to Ad"
 						type="text"
 						fullWidth
+						value={jobLink}
+						onChange={(e) => setjobLink(e.target.value)}
 					/>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose} color="primary">
 						Cancel
 					</Button>
-					<Button onClick={handleClose} color="primary">
-						Subscribe
+					<Button onClick={updateJob} color="primary">
+						Update
 					</Button>
 				</DialogActions>
 			</Dialog>

@@ -9,6 +9,17 @@ export class Job extends React.Component {
 		loadingJob: true,
 	};
 
+	jobUpdate = (updatedJob) => {
+		const { jobTitle, jobCompany, jobLink } = updatedJob;
+		this.setState({
+			jobTitle: jobTitle,
+			jobCompany: jobCompany,
+			jobLink: jobLink,
+		});
+
+		//TODO: Need to update DB entry when DB exists.
+	};
+
 	componentDidMount() {
 		// Note: faking an API call with settimeout
 		setTimeout(() => {
@@ -33,7 +44,7 @@ export class Job extends React.Component {
 						<h2>{this.state.jobCompany}</h2>
 						<a href={this.state.jobLink}>Job Ad</a>
 
-						<EditDialogue />
+						<EditDialogue jobUpdate={this.jobUpdate} />
 					</Container>
 				)}
 			</div>
