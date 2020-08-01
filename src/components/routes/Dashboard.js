@@ -11,39 +11,66 @@ export class Dashboard extends React.Component {
 		jobApplications: [],
 	};
 
-	componentDidMount() {
-		// Note: faking an API call with settimeout
-		setTimeout(() => {
+	async componentDidMount() {
+		// Store for applications
+		let applications;
+		let formattedApplications = [];
+
+		try {
+			// Getting applications
+			applications = await fetch("http://localhosdt:5000/api/application/all");
+			applications = await applications.json();
+
+			applications.forEach((application) => {
+				formattedApplications.push({
+					id: application.app_id,
+					jobTitle: application.app_title,
+					company: application.app_employer,
+					link: application.app_link,
+				});
+			});
+
 			this.setState({
-				jobApplications: [
-					{
-						id: 1,
-						jobTitle: "JS Engineer",
-						company: "ABC Startup",
-						link: "https://example.com",
-					},
-					{
-						id: 2,
-						jobTitle: "FrontEnd Engineer",
-						company: "ABC Corp.",
-						link: "https://example.com",
-					},
-					{
-						id: 33,
-						jobTitle: "Rails Dev",
-						company: "XYZ Startup",
-						link: "https://example.com",
-					},
-					{
-						id: 78,
-						jobTitle: "COBAL Engineer",
-						company: "1944 Company",
-						link: "https://example.com",
-					},
-				],
+				jobApplications: formattedApplications,
 				gettingJobs: false,
 			});
-		}, 3000);
+		} catch (err) {
+			console.log(err);
+			this.setState({ gettingJobs: false });
+		}
+
+		// Note: faking an API call with settimeout
+		// setTimeout(() => {
+		// 	this.setState({
+		// 		jobApplications: [
+		// 			{
+		// 				id: 1,
+		// 				jobTitle: "JS Engineer",
+		// 				company: "ABC Startup",
+		// 				link: "https://example.com",
+		// 			},
+		// 			{
+		// 				id: 2,
+		// 				jobTitle: "FrontEnd Engineer",
+		// 				company: "ABC Corp.",
+		// 				link: "https://example.com",
+		// 			},
+		// 			{
+		// 				id: 33,
+		// 				jobTitle: "Rails Dev",
+		// 				company: "XYZ Startup",
+		// 				link: "https://example.com",
+		// 			},
+		// 			{
+		// 				id: 78,
+		// 				jobTitle: "COBAL Engineer",
+		// 				company: "1944 Company",
+		// 				link: "https://example.com",
+		// 			},
+		// 		],
+		// 		gettingJobs: false,
+		// 	});
+		// }, 3000);
 	}
 
 	render() {
@@ -51,7 +78,7 @@ export class Dashboard extends React.Component {
 			<div>
 				<Appbar />
 				<Container maxWidth={false}>
-					<h1>Welcome to the Dashboard</h1>
+					<h1>Job Applications</h1>
 					{this.state.gettingJobs ? (
 						<Spinner />
 					) : (
