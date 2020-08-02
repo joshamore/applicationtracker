@@ -9,6 +9,7 @@ export class Dashboard extends React.Component {
 	state = {
 		gettingJobs: true,
 		jobApplications: [],
+		errorGettingApplications: false,
 	};
 
 	async componentDidMount() {
@@ -18,9 +19,10 @@ export class Dashboard extends React.Component {
 
 		try {
 			// Getting applications
-			applications = await fetch("http://localhosdt:5000/api/application/all");
+			applications = await fetch("http://localhost:5000/api/application/all");
 			applications = await applications.json();
 
+			// Formatting applications before adding to state
 			applications.forEach((application) => {
 				formattedApplications.push({
 					id: application.app_id,
@@ -30,13 +32,14 @@ export class Dashboard extends React.Component {
 				});
 			});
 
+			// Adding formatted applicationst to state
 			this.setState({
 				jobApplications: formattedApplications,
 				gettingJobs: false,
 			});
 		} catch (err) {
 			console.log(err);
-			this.setState({ gettingJobs: false });
+			this.setState({ gettingJobs: false, errorGettingApplications: true });
 		}
 
 		// Note: faking an API call with settimeout
@@ -74,14 +77,25 @@ export class Dashboard extends React.Component {
 	}
 
 	render() {
-		return (
-			<div>
-				<Appbar />
-				<Container maxWidth={false}>
-					<h1>Job Applications</h1>
-					{this.state.gettingJobs ? (
+		if (this.state.gettingJobs && !this.state.errorGettingApplications) {
+			return (
+				<div>
+					<Appbar />
+					<Container maxWidth={false}>
+						<h1>Job Applications</h1>
 						<Spinner />
-					) : (
+					</Container>
+				</div>
+			);
+		} else if (
+			!this.state.gettingJobs &&
+			!this.state.errorGettingApplications
+		) {
+			return (
+				<div>
+					<Appbar />
+					<Container maxWidth={false}>
+						<h1>Job Applications</h1>
 						<Grid container>
 							{this.state.jobApplications.map((application) => (
 								<Grid item xs={12} sm={6} md={3}>
@@ -93,10 +107,44 @@ export class Dashboard extends React.Component {
 								</Grid>
 							))}
 						</Grid>
-					)}
-				</Container>
-			</div>
-		);
+					</Container>
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<Appbar />
+					<Container maxWidth={false}>
+						<h1>Job Applications</h1>
+						<p>Unable to get job applications :(</p>
+					</Container>
+				</div>
+			);
+		}
+
+		// return (
+		// 	<div>
+		// 		<Appbar />
+		// 		<Container maxWidth={false}>
+		// 			<h1>Job Applications</h1>
+		// 			{this.state.gettingJobs ? (
+		// 				<Spinner />
+		// 			) : (
+		// 				<Grid container>
+		// 					{this.state.jobApplications.map((application) => (
+		// 						<Grid item xs={12} sm={6} md={3}>
+		// 							<JobCard
+		// 								jobTitle={application.jobTitle}
+		// 								company={application.company}
+		// 								id={application.id}
+		// 							/>
+		// 						</Grid>
+		// 					))}
+		// 				</Grid>
+		// 			)}
+		// 		</Container>
+		// 	</div>
+		// );
 	}
 }
 
