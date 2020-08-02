@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
-import { Home } from "./components/routes/Home";
+import Home from "./components/routes/Home";
 import { Dashboard } from "./components/routes/Dashboard";
 import { Add } from "./components/routes/Add";
 import { Job } from "./components/routes/Job";
