@@ -26,20 +26,34 @@ export default function AddForm() {
 	// Stores spinner state
 	const [formSubmitted, setFormSubmitted] = useState(false);
 
-	// Sends application data to server. Returns a promise boolean with true if successful or false if failed.
-	// TODO: create backend route
-	let addApplication = (jobTitle, jobCompany, jobLink) => {
-		console.log(
-			`Applied for ${jobTitle} position with ${jobCompany}. Link to ad: ${jobLink}`
-		);
+	const addApplication = async (jobTitle, jobCompany, jobLink) => {
+		let confirm;
 
-		// Promise with timout used to mimick API call
-		// TODO: remove after backend created.
-		return new Promise((res, rej) => {
-			setTimeout(() => {
-				res(true);
-			}, 1000);
-		});
+		try {
+			// Submitting data
+			confirm = await fetch("http://localhost:5000/api/application/", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					applicationtitle: jobTitle,
+					applicationemployer: jobCompany,
+					applicationlink: jobLink,
+				}),
+			});
+
+			confirm = await confirm.json();
+
+			if (confirm.success) {
+				return true;
+			} else {
+				throw confirm.error;
+			}
+		} catch (err) {
+			// TODO: better error handling
+			console.log(`Error POSTing data: ${err}`);
+		}
 	};
 
 	// Hook used for redirect
@@ -76,14 +90,13 @@ export default function AddForm() {
 							onClick={(e) => {
 								setFormSubmitted(true);
 
-								// Passing job application data to parent component
+								// Sending application to backend
 								addApplication(jobTitle, jobCompany, jobLink)
 									.then((res) => {
 										if (res) {
 											// Redirecting to dashboard
 											history.push("/dashboard");
 										} else {
-											// Rerendering form
 											setFormSubmitted(false);
 										}
 									})

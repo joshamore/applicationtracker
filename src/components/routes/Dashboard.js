@@ -50,7 +50,7 @@ export default function Dashboard() {
 
 		// Getting applications
 		fetchData();
-	});
+	}, []);
 
 	// Returning render with spinner while awaiting applications
 	if (gettingJobs && !errorGettingApplications) {

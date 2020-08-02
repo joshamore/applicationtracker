@@ -31,7 +31,7 @@ export default function Job() {
 			setjobLink("https://example.com/OLD");
 			setloadingJob(false);
 		}, 3000);
-	});
+	}, []);
 
 	return (
 		<div>
