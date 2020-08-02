@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function AddForm({ addApplication }) {
+export default function AddForm() {
 	const classes = useStyles();
 
 	// Storing state of form using hooks
@@ -25,6 +25,22 @@ export default function AddForm({ addApplication }) {
 
 	// Stores spinner state
 	const [formSubmitted, setFormSubmitted] = useState(false);
+
+	// Sends application data to server. Returns a promise boolean with true if successful or false if failed.
+	// TODO: create backend route
+	let addApplication = (jobTitle, jobCompany, jobLink) => {
+		console.log(
+			`Applied for ${jobTitle} position with ${jobCompany}. Link to ad: ${jobLink}`
+		);
+
+		// Promise with timout used to mimick API call
+		// TODO: remove after backend created.
+		return new Promise((res, rej) => {
+			setTimeout(() => {
+				res(true);
+			}, 1000);
+		});
+	};
 
 	// Hook used for redirect
 	let history = useHistory();
@@ -61,11 +77,7 @@ export default function AddForm({ addApplication }) {
 								setFormSubmitted(true);
 
 								// Passing job application data to parent component
-								addApplication({
-									jobTitle: jobTitle,
-									jobCompany: jobCompany,
-									jobLink: jobLink,
-								})
+								addApplication(jobTitle, jobCompany, jobLink)
 									.then((res) => {
 										if (res) {
 											// Redirecting to dashboard
