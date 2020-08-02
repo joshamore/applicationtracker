@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 import AppsIcon from "@material-ui/icons/Apps";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -53,7 +53,7 @@ export default function MenuAppBar() {
 						Application Tracker
 					</Typography>
 					<div>
-						<IconButton
+						<MenuIcon
 							aria-label="Menu to navigate"
 							aria-controls="menu-appbar"
 							aria-haspopup="true"
@@ -61,7 +61,7 @@ export default function MenuAppBar() {
 							color="inherit"
 						>
 							<AppsIcon />
-						</IconButton>
+						</MenuIcon>
 						<Menu
 							id="menu-appbar"
 							anchorEl={anchorEl}
