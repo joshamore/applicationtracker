@@ -40,7 +40,7 @@ export default function JobEditDialogue({ jobUpdate }) {
 				onClose={handleClose}
 				aria-labelledby="form-dialog-title"
 			>
-				<DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+				<DialogTitle id="form-dialog-title">Update Job</DialogTitle>
 				<DialogContent>
 					<DialogContentText>Update job application details.</DialogContentText>
 					<TextField
