@@ -28,7 +28,13 @@ export default function JobCard(props) {
 
 	// Redirect to job page
 	// TODO: Will need to take ID when backend exists
-	const toJob = () => history.push("/job");
+	const toJob = () => {
+		history.push({
+			pathname: "/job/",
+			search: `${id}`,
+			id: id,
+		});
+	};
 
 	return (
 		<Card className={classes.root}>
