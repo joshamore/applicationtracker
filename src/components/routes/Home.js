@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Appbar from "../Appbar";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
@@ -16,10 +17,10 @@ export default function Home() {
 			</Container>
 			<Container maxWidth={false}>
 				<ButtonGroup color="primary" aria-label="large button group">
-					<Button>
+					<Button component={Link} to="/add">
 						<AddCircleOutlineIcon /> Add Job
 					</Button>
-					<Button>
+					<Button component={Link} to="/dashboard">
 						<ListIcon /> Applied Jobs
 					</Button>
 				</ButtonGroup>
