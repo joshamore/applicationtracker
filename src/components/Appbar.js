@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
 	title: {
 		flexGrow: 1,
 	},
+	pointy: {
+		cursor: "pointer",
+	},
 }));
 
 export default function MenuAppBar() {
@@ -44,13 +47,16 @@ export default function MenuAppBar() {
 		handleClose();
 		history.push("/dashboard");
 	};
+	const toHome = () => {
+		history.push("/");
+	};
 
 	return (
 		<div className={classes.root}>
 			<AppBar position="static">
 				<Toolbar>
-					<Typography variant="h6" className={classes.title}>
-						Application Tracker
+					<Typography onClick={toHome} variant="h6" className={classes.title}>
+						<span className={classes.pointy}>Application Tracker</span>
 					</Typography>
 					<div>
 						<MenuIcon
