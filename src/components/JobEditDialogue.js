@@ -7,11 +7,16 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-export default function JobEditDialogue({ jobUpdate }) {
+export default function JobEditDialogue({
+	jobUpdate,
+	old_jobTitle,
+	old_jobCompany,
+	old_jobLink,
+}) {
 	const [open, setOpen] = useState(false);
-	const [jobTitle, setjobTitle] = useState("");
-	const [jobCompany, setjobCompany] = useState("");
-	const [jobLink, setjobLink] = useState("");
+	const [jobTitle, setjobTitle] = useState(old_jobTitle);
+	const [jobCompany, setjobCompany] = useState(old_jobCompany);
+	const [jobLink, setjobLink] = useState(old_jobLink);
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -27,7 +32,9 @@ export default function JobEditDialogue({ jobUpdate }) {
 			jobTitle: jobTitle,
 			jobCompany: jobCompany,
 			jobLink: jobLink,
-		});
+		})
+			.then((confirm) => console.log(`Job updated: `))
+			.catch((err) => console.log(err));
 	};
 
 	return (

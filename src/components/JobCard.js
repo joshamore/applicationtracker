@@ -27,7 +27,6 @@ export default function JobCard(props) {
 	const { jobTitle, company, id } = props;
 
 	// Redirect to job page
-	// TODO: Will need to take ID when backend exists
 	const toJob = () => {
 		history.push({
 			pathname: "/job/",
@@ -54,15 +53,13 @@ export default function JobCard(props) {
 				</Typography>
 			</CardContent>
 			<CardActions>
-				{/* TODO: The redirect will route to the specific job when backend up */}
-
 				<Button
 					size="small"
 					color="primary"
 					variant="contained"
 					onClick={toJob}
 				>
-					Add Update
+					Open
 				</Button>
 			</CardActions>
 		</Card>

@@ -22,14 +22,52 @@ export default function Job() {
 	const [bad, setbad] = useState(false);
 	const [badMessage, setbadMessage] = useState("");
 
-	function jobUpdate(updatedJob) {
-		const { jobTitle, jobCompany, jobLink } = updatedJob;
+	// Update job state if changes have been made
+	async function jobUpdate(updatedJob) {
+		// Setting loading job to true while updating
+		setloadingJob(true);
 
-		setjobTitle(jobTitle);
-		setjobCompany(jobCompany);
-		setjobLink(jobLink);
+		let confirm;
 
-		//TODO: Need to update DB entry when DB exists.
+		try {
+			// Submitting update
+			confirm = await fetch("http://localhost:5000/api/application/", {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					id: jobID,
+					applicationtitle: updatedJob.jobTitle,
+					applicationemployer: updatedJob.jobCompany,
+					applicationlink: updatedJob.jobLink,
+				}),
+			});
+
+			confirm = await confirm.json();
+
+			if (confirm.app_id === jobID) {
+				// If update successful, updating state and rendering changes
+				setjobTitle(updatedJob.jobTitle);
+				setjobCompany(updatedJob.jobCompany);
+				setjobLink(updatedJob.jobLink);
+
+				setloadingJob(false);
+
+				return jobID;
+			} else {
+				// If errors present, throwing to catch
+				throw confirm.error;
+			}
+		} catch (err) {
+			// TODO: better error handling
+			console.log(`Error POSTing data: ${err}`);
+
+			setbad(true);
+			setbadMessage("Error updating job :(");
+
+			return "failed";
+		}
 	}
 
 	useEffect(() => {
@@ -88,7 +126,12 @@ export default function Job() {
 					<h2>{jobCompany}</h2>
 					<a href={jobLink}>Job Ad</a>
 
-					<EditDialogue jobUpdate={jobUpdate} />
+					<EditDialogue
+						jobUpdate={jobUpdate}
+						old_jobTitle={jobTitle}
+						old_jobCompany={jobCompany}
+						old_jobLink={jobLink}
+					/>
 				</Container>
 			</div>
 		);
