@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import { FormGroup } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import Spinner from "./Spinner";
@@ -12,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
 			margin: theme.spacing(1),
 			width: "25ch",
 		},
+	},
+	submitJobButton: {
+		marginTop: theme.spacing(3),
+		width: "50%",
+		marginLeft: "25%",
 	},
 }));
 
@@ -61,9 +67,9 @@ export default function AddForm() {
 
 	return (
 		<div>
-			<Container maxWidth="md">
+			<Container maxWidth="sm">
 				{!formSubmitted ? (
-					<form className={classes.root} noValidate autoComplete="off">
+					<FormGroup noValidate autoComplete="off">
 						<TextField
 							id="jobTitle"
 							label="Job Title"
@@ -82,8 +88,9 @@ export default function AddForm() {
 							value={jobLink}
 							onChange={(e) => setjobLink(e.target.value)}
 						/>
-						<br />
+
 						<Button
+							className={classes.submitJobButton}
 							id="addApplication"
 							variant="contained"
 							color="primary"
@@ -108,7 +115,7 @@ export default function AddForm() {
 						>
 							Add Application
 						</Button>
-					</form>
+					</FormGroup>
 				) : (
 					<Spinner />
 				)}

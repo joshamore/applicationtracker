@@ -7,7 +7,7 @@ export default function Add() {
 	return (
 		<div>
 			<Appbar />
-			<Container maxWidth={false}>
+			<Container maxWidth="sm" style={{ textAlign: "center" }}>
 				<h1>Add Job Application</h1>
 				<p>This is where you will add your job applications for tracking.</p>
 				<AddForm />
