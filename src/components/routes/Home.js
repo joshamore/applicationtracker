@@ -11,11 +11,11 @@ export default function Home() {
 	return (
 		<div>
 			<Appbar />
-			<Container maxWidth={false}>
+			<Container maxWidth="sm">
 				<h1>Application Tracker</h1>
-				<h2>Track your job application history and progress.</h2>
+				<p>Track your job application history and progress.</p>
 			</Container>
-			<Container maxWidth={false}>
+			<Container maxWidth="sm">
 				<ButtonGroup color="primary" aria-label="large button group">
 					<Button component={Link} to="/add">
 						<AddCircleOutlineIcon /> Add Job
