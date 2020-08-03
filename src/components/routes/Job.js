@@ -5,7 +5,24 @@ import LinearLoader from "../LinearLoader";
 import Appbar from "../Appbar";
 import EditDialogue from "../JobEditDialogue";
 
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+	jobPaper: {
+		marginTop: "5%",
+		textAlign: "center",
+	},
+	jobEdit: {
+		marginTop: "5%",
+		marginBottom: "5%",
+	},
+});
+
 export default function Job() {
+	const classes = useStyles();
+
 	// Setting locaion to receive props
 	const location = useLocation();
 
@@ -70,6 +87,7 @@ export default function Job() {
 		}
 	}
 
+	// getting job after pageload
 	useEffect(() => {
 		// Validating that a job ID was provided
 		if (jobID === null || jobID === undefined) {
@@ -121,18 +139,29 @@ export default function Job() {
 		return (
 			<div>
 				<Appbar />
-				<Container maxWidth={false}>
-					<h1>{jobTitle}</h1>
-					<h2>{jobCompany}</h2>
-					<a href={jobLink}>Job Ad</a>
 
-					<EditDialogue
-						jobUpdate={jobUpdate}
-						old_jobTitle={jobTitle}
-						old_jobCompany={jobCompany}
-						old_jobLink={jobLink}
-					/>
-				</Container>
+				<Grid container justify="center">
+					<Grid item xs={9} sm={6}>
+						<Paper variant="outlined" className={classes.jobPaper}>
+							<h1>Application</h1>
+							<p>
+								<strong>Job Title:</strong> {jobTitle}
+							</p>
+							<p>
+								<strong>Company:</strong> {jobCompany}
+							</p>
+							{jobLink !== null ? <a href={jobLink}>Job Posting</a> : ""}
+							<Grid container justify="center" className={classes.jobEdit}>
+								<EditDialogue
+									jobUpdate={jobUpdate}
+									old_jobTitle={jobTitle}
+									old_jobCompany={jobCompany}
+									old_jobLink={jobLink}
+								/>
+							</Grid>
+						</Paper>
+					</Grid>
+				</Grid>
 			</div>
 		);
 	}
