@@ -3,6 +3,11 @@ class Auth {
 		this.auth = false;
 	}
 
+	/**
+	 * Checking if user is authenticated.
+	 *
+	 * Returns: true if auth or false if not
+	 */
 	async isAuth() {
 		// Getting token from localstorage
 		const token = localStorage.getItem("token");
@@ -32,6 +37,17 @@ class Auth {
 
 			return this.auth;
 		}
+	}
+
+	/**
+	 * Removes user auth (deletes JWT)
+	 */
+
+	removeAuth() {
+		// Deleting JWT from localStorage
+		localStorage.removeItem("token");
+
+		return true;
 	}
 }
 
