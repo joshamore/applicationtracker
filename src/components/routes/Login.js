@@ -48,7 +48,13 @@ export default function Login() {
 	// Setting isLoading after pageload
 	useEffect(() => {
 		setIsLoading(false);
-	}, []);
+
+		Auth.isAuth().then((res) => {
+			if (res) {
+				history.push("/");
+			}
+		});
+	}, [history]);
 
 	const attemptLogin = async (email, password) => {
 		// TODO: input validation and throw an alert
