@@ -5,10 +5,12 @@ import Home from "./components/routes/Home";
 import Dashboard from "./components/routes/Dashboard";
 import Add from "./components/routes/Add";
 import Job from "./components/routes/Job";
+import Login from "./components/routes/Login";
 
 function App() {
 	return (
 		<BrowserRouter>
+			<Route exact path="/login" component={Login} />
 			<Route exact path="/" component={Home} />
 			<Route exact path="/Dashboard" component={Dashboard} />
 			<Route exact path="/Job" component={Job} />
