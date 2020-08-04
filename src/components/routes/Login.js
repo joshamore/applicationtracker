@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Spinner from "../Spinner";
+import { useHistory } from "react-router-dom";
 
 import Auth from "../../helpers/Auth";
 
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
+	const history = useHistory();
 	const classes = useStyles();
 
 	// Storing state of form elements
@@ -128,10 +130,13 @@ export default function Login() {
 
 								attemptLogin(email, password)
 									.then((res) => {
-										// TODO: if res true, a token is in localStorage. Handle routing
 										setIsLoading(false);
 
-										console.log(res);
+										// If login successful, redirecting to home
+										if (res) {
+											console.log("login successful");
+											history.push("/");
+										}
 									})
 									.catch((err) => {
 										// TODO: should display an error alert if there's an error.

@@ -8,6 +8,7 @@ import AppsIcon from "@material-ui/icons/Apps";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { useHistory } from "react-router-dom";
+import Auth from "../helpers/Auth";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -51,6 +52,17 @@ export default function MenuAppBar() {
 		history.push("/");
 	};
 
+	// Logout clicked
+	const logout = () => {
+		let isOut = Auth.removeAuth();
+
+		if (isOut) {
+			history.push("/login");
+		} else {
+			console.log("Error logging out");
+		}
+	};
+
 	return (
 		<div className={classes.root}>
 			<AppBar position="static">
@@ -85,6 +97,7 @@ export default function MenuAppBar() {
 						>
 							<MenuItem onClick={toAdd}>Add Application</MenuItem>
 							<MenuItem onClick={toDashboard}>All Applications</MenuItem>
+							<MenuItem onClick={logout}>Logout</MenuItem>
 						</Menu>
 					</div>
 				</Toolbar>
