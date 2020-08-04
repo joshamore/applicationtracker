@@ -45,6 +45,7 @@ export default function Job() {
 		setloadingJob(true);
 
 		let confirm;
+		const token = localStorage.getItem("token");
 
 		try {
 			// Submitting update
@@ -52,6 +53,7 @@ export default function Job() {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
+					"auth-token": token,
 				},
 				body: JSON.stringify({
 					id: jobID,
@@ -96,13 +98,21 @@ export default function Job() {
 		} else {
 			// ASYNC function to get application
 			async function fetchApplication() {
+				const token = localStorage.getItem("token");
 				// Store for application
 				let application;
 
 				try {
 					// Getting application
 					application = await fetch(
-						`http://localhost:5000/api/application/?id=${jobID}`
+						`http://localhost:5000/api/application/?id=${jobID}`,
+						{
+							method: "GET",
+							headers: {
+								"Content-Type": "application/json",
+								"auth-token": token,
+							},
+						}
 					);
 					application = await application.json();
 

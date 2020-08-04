@@ -33,6 +33,8 @@ export default function AddForm() {
 	const [formSubmitted, setFormSubmitted] = useState(false);
 
 	const addApplication = async (jobTitle, jobCompany, jobLink) => {
+		const token = localStorage.getItem("token");
+
 		let confirm;
 
 		try {
@@ -40,6 +42,7 @@ export default function AddForm() {
 			confirm = await fetch("http://localhost:5000/api/application/", {
 				method: "POST",
 				headers: {
+					"auth-token": token,
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
