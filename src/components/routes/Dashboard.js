@@ -23,9 +23,21 @@ export default function Dashboard() {
 			let applications;
 			let formattedApplications = [];
 
+			// Getting token
+			const token = localStorage.getItem("token");
+
 			try {
 				// Getting applications
-				applications = await fetch("http://localhost:5000/api/application/all");
+				applications = await fetch(
+					"http://localhost:5000/api/application/all",
+					{
+						method: "GET",
+						headers: {
+							"auth-token": token,
+							"Content-Type": "application/json",
+						},
+					}
+				);
 				applications = await applications.json();
 
 				// Formatting applications before adding to state
