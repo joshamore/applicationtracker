@@ -11,6 +11,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Spinner from "../Spinner";
 
+import Auth from "../../helpers/Auth";
+
 // Inspired by: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
 
 const useStyles = makeStyles((theme) => ({
@@ -68,7 +70,8 @@ export default function Login() {
 			// Setting local storage
 			localStorage.setItem("token", loginConfirm.token);
 
-			return true;
+			// Checking validaion and returning results
+			return await Auth.isAuth();
 		} catch (err) {
 			console.log(`ERROR WITH LOGIN: ${err}`);
 
@@ -127,6 +130,8 @@ export default function Login() {
 									.then((res) => {
 										// TODO: if res true, a token is in localStorage. Handle routing
 										setIsLoading(false);
+
+										console.log(res);
 									})
 									.catch((err) => {
 										// TODO: should display an error alert if there's an error.
