@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Home from "./components/routes/Home";
 import Dashboard from "./components/routes/Dashboard";
@@ -11,13 +11,16 @@ import { ProtectedRoute } from "./helpers/ProtectedRoute";
 function App() {
 	return (
 		<BrowserRouter>
-			<Route exact path="/login" component={Login} />
-			<Route exact path="/" component={Home} />
+			<Switch>
+				<Route exact path="/login" component={Login} />
 
-			<ProtectedRoute exact path="/Dashboard" component={Dashboard} />
+				<ProtectedRoute exact path="/Dashboard" component={Dashboard} />
+				<ProtectedRoute exact path="/Job" component={Job} />
+				<ProtectedRoute exact path="/Add" component={Add} />
 
-			<Route exact path="/Job" component={Job} />
-			<Route exact path="/Add" component={Add} />
+				{/* Below is rendering any non-specific routes to home (or login if not auth) */}
+				<ProtectedRoute path="/" component={Home} />
+			</Switch>
 		</BrowserRouter>
 	);
 }
