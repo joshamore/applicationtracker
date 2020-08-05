@@ -189,18 +189,13 @@ export default function Login() {
 											setIsLoading(false);
 
 											// If login successful, redirecting to home
-											if (res.status === 200) {
+											if (res) {
 												console.log("login successful");
 												history.push("/");
-											} else if (res.status === 400) {
-												setAlertMessage(`😥 Error: ${res.error}`);
-												setAlertSeverity("error");
-												setIsAlert(true);
-
-												// LOGGIN ERROR
-												console.log(res.error);
 											} else {
-												setAlertMessage("😥 Error logging in");
+												setAlertMessage(
+													"😥 Error logging in. Are your email and password correct?"
+												);
 												setAlertSeverity("error");
 												setIsAlert(true);
 
