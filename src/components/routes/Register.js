@@ -33,9 +33,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	alert: {
 		width: "100%",
-		"& > * + *": {
-			marginTop: theme.spacing(2),
-		},
+		marginTop: theme.spacing(2),
+		marginBottom: "-10%",
 	},
 }));
 
@@ -165,7 +164,7 @@ export default function Register() {
 		return (
 			<Container component="main" maxWidth="xs">
 				{isError ? (
-					<div className={classes.root}>
+					<div className={classes.alert}>
 						<Alert
 							severity="error"
 							onClose={() => {
@@ -255,6 +254,12 @@ export default function Register() {
 										.then((confirm) => {
 											if (confirm) {
 												setIsLoading(false);
+
+												// Redirecting to login
+												history.push({
+													pathname: "/login",
+													fromRegister: true,
+												});
 											} else {
 												setIsLoading(false);
 												setErrorMessage("Issue when creating your account 😢");
@@ -268,10 +273,8 @@ export default function Register() {
 										});
 								} else {
 									setIsLoading(false);
-									console.log("Password issue");
 
-									setErrorMessage("Issue when creating your account 😢");
-									setIsError(true);
+									console.log("issue with input");
 								}
 
 								// attemptLogin(email, password)
