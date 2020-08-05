@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Spinner from "../Spinner";
 import { useHistory, useLocation } from "react-router-dom";
-import Alert from "@material-ui/lab/Alert";
+import Alert from "../Alert";
 
 import Auth from "../../helpers/Auth";
 
@@ -51,7 +51,9 @@ export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
-	const [registerAlert, setRegisterAlert] = useState(false);
+	const [isAlert, setIsAlert] = useState(false);
+	const [alertMessage, setAlertMessage] = useState("");
+	const [alertSeverity, setAlertSeverity] = useState("success");
 
 	// Setting isLoading after pageload
 	useEffect(() => {
@@ -64,9 +66,11 @@ export default function Login() {
 			}
 		});
 
-		// Setting account creation alert if needed
+		// Setting account creation alert state if needed
 		if (location.fromRegister !== undefined && location.fromRegister) {
-			setRegisterAlert(true);
+			setAlertMessage("Account creation successful! Please log in below 👇");
+			setAlertSeverity("success");
+			setIsAlert(true);
 		}
 	}, [history, location]);
 
@@ -105,16 +109,12 @@ export default function Login() {
 	if (!isLoading) {
 		return (
 			<Container component="main" maxWidth="xs">
-				{registerAlert ? (
-					<div className={classes.alert}>
-						<Alert
-							onClose={() => {
-								setRegisterAlert(false);
-							}}
-						>
-							{"Account creation successful! Please log in below 👇"}
-						</Alert>
-					</div>
+				{isAlert ? (
+					<Alert
+						severity={alertSeverity}
+						alertMessage={alertMessage}
+						setAlert={setIsAlert}
+					/>
 				) : (
 					<div></div>
 				)}
@@ -207,4 +207,16 @@ export default function Login() {
 			</Container>
 		);
 	}
+}
+
+{
+	/* <div className={classes.alert}>
+<Alert
+	onClose={() => {
+		setRegisterAlert(false);
+	}}
+>
+	{"Account creation successful! Please log in below 👇"}
+</Alert>
+</div> */
 }
