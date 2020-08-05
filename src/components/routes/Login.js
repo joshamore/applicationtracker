@@ -10,7 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Spinner from "../Spinner";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
 
 import Auth from "../../helpers/Auth";
 
@@ -33,28 +34,41 @@ const useStyles = makeStyles((theme) => ({
 	spinnerSpace: {
 		marginTop: theme.spacing(2),
 	},
+	alert: {
+		width: "100%",
+		marginTop: theme.spacing(2),
+		marginBottom: "-10%",
+	},
 }));
 
 export default function Login() {
+	// Required hooks
 	const history = useHistory();
 	const classes = useStyles();
+	const location = useLocation();
 
-	// Storing state of form elements
+	// Creating state
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
 	const [isLoading, setIsLoading] = useState(false);
+	const [registerAlert, setRegisterAlert] = useState(false);
 
 	// Setting isLoading after pageload
 	useEffect(() => {
 		setIsLoading(false);
 
+		// Redirecting user to home route if already auth
 		Auth.isAuth().then((res) => {
 			if (res) {
 				history.push("/");
 			}
 		});
-	}, [history]);
+
+		// Setting account creation alert if needed
+		if (location.fromRegister !== undefined && location.fromRegister) {
+			setRegisterAlert(true);
+		}
+	}, [history, location]);
 
 	const attemptLogin = async (email, password) => {
 		// TODO: input validation and throw an alert
@@ -91,6 +105,19 @@ export default function Login() {
 	if (!isLoading) {
 		return (
 			<Container component="main" maxWidth="xs">
+				{registerAlert ? (
+					<div className={classes.alert}>
+						<Alert
+							onClose={() => {
+								setRegisterAlert(false);
+							}}
+						>
+							{"Account creation successful! Please log in below 👇"}
+						</Alert>
+					</div>
+				) : (
+					<div></div>
+				)}
 				<CssBaseline />
 				<div className={classes.paper}>
 					<Typography component="h2" variant="h5">
