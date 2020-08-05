@@ -9,10 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Spinner from "../Spinner";
 import { useHistory } from "react-router-dom";
-import Auth from "../../helpers/Auth";
-
-// Alert imports
 import Alert from "@material-ui/lab/Alert";
+import Auth from "../../helpers/Auth";
 
 // Inspired by: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
 
