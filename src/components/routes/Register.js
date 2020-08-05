@@ -54,6 +54,7 @@ export default function Register() {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 
+	// Loading state
 	const [isLoading, setIsLoading] = useState(false);
 
 	// Setting isLoading after pageload
@@ -254,9 +255,6 @@ export default function Register() {
 										.then((confirm) => {
 											if (confirm) {
 												setIsLoading(false);
-												// UPDATE WHAT HAPPENS HERE
-												setErrorMessage("WOO");
-												setIsError(true);
 											} else {
 												setIsLoading(false);
 												setErrorMessage("Issue when creating your account 😢");
