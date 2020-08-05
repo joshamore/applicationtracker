@@ -253,15 +253,3 @@ export default function Login() {
 		);
 	}
 }
-
-{
-	/* <div className={classes.alert}>
-<Alert
-	onClose={() => {
-		setRegisterAlert(false);
-	}}
->
-	{"Account creation successful! Please log in below 👇"}
-</Alert>
-</div> */
-}
