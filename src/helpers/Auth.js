@@ -19,21 +19,27 @@ class Auth {
 			return this.auth;
 		}
 
-		// Checking if JWT valid
-		let isValid = await fetch("http://localhost:5000/auth/check", {
-			method: "GET",
-			headers: {
-				"auth-token": token,
-				"Content-Type": "application/json",
-			},
-		});
+		try {
+			// Checking if JWT valid
+			let isValid = await fetch("http://localhost:5000/auth/check", {
+				method: "GET",
+				headers: {
+					"auth-token": token,
+					"Content-Type": "application/json",
+				},
+			});
 
-		if (isValid.status !== 200) {
+			if (isValid.status !== 200) {
+				this.auth = false;
+
+				return this.auth;
+			} else {
+				this.auth = true;
+
+				return this.auth;
+			}
+		} catch (err) {
 			this.auth = false;
-
-			return this.auth;
-		} else {
-			this.auth = true;
 
 			return this.auth;
 		}
