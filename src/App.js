@@ -6,6 +6,7 @@ import Dashboard from "./components/routes/Dashboard";
 import Add from "./components/routes/Add";
 import Job from "./components/routes/Job";
 import Login from "./components/routes/Login";
+import Register from "./components/routes/Register";
 import { ProtectedRoute } from "./helpers/ProtectedRoute";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
 		<BrowserRouter>
 			<Switch>
 				<Route exact path="/login" component={Login} />
+				<Route exact path="/register" component={Register} />
 
 				<ProtectedRoute exact path="/Dashboard" component={Dashboard} />
 				<ProtectedRoute exact path="/Job" component={Job} />
