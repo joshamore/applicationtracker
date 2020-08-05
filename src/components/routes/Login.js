@@ -74,6 +74,27 @@ export default function Login() {
 		}
 	}, [history, location]);
 
+	// Validating the login form
+	const validateLoginForm = () => {
+		// Validating input
+		if (!email.includes("@")) {
+			setAlertMessage("🙅 Email address must be valid ");
+			setAlertSeverity("error");
+			setIsAlert(true);
+
+			return false;
+		}
+		if (password.length <= 8) {
+			setAlertMessage("🙅 Password must be at least 9 characters");
+			setAlertSeverity("error");
+			setIsAlert(true);
+
+			return false;
+		}
+
+		return true;
+	};
+
 	const attemptLogin = async (email, password) => {
 		// TODO: input validation and throw an alert
 
@@ -158,23 +179,47 @@ export default function Login() {
 							color="primary"
 							className={classes.submit}
 							onClick={(e) => {
-								// Setting loading spinner
-								setIsLoading(true);
+								// Attempting to login if validation of form passes
+								if (validateLoginForm()) {
+									// Setting loading spinner
+									setIsLoading(true);
 
-								attemptLogin(email, password)
-									.then((res) => {
-										setIsLoading(false);
+									attemptLogin(email, password)
+										.then((res) => {
+											setIsLoading(false);
 
-										// If login successful, redirecting to home
-										if (res) {
-											console.log("login successful");
-											history.push("/");
-										}
-									})
-									.catch((err) => {
-										// TODO: should display an error alert if there's an error.
-										setIsLoading(false);
-									});
+											// If login successful, redirecting to home
+											if (res.status === 200) {
+												console.log("login successful");
+												history.push("/");
+											} else if (res.status === 400) {
+												setAlertMessage(`😥 Error: ${res.error}`);
+												setAlertSeverity("error");
+												setIsAlert(true);
+
+												// LOGGIN ERROR
+												console.log(res.error);
+											} else {
+												setAlertMessage("😥 Error logging in");
+												setAlertSeverity("error");
+												setIsAlert(true);
+
+												// LOGGIN ERROR
+												console.log(res);
+											}
+										})
+										.catch((err) => {
+											// If error, stopping spinner and displaying error.
+											setIsLoading(false);
+
+											setAlertMessage("😥 Error logging in");
+											setAlertSeverity("error");
+											setIsAlert(true);
+
+											// LOGGIN ERROR
+											console.log(err);
+										});
+								}
 							}}
 						>
 							Log In
