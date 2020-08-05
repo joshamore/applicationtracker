@@ -276,21 +276,6 @@ export default function Register() {
 
 									console.log("issue with input");
 								}
-
-								// attemptLogin(email, password)
-								// 	.then((res) => {
-								// 		setIsLoading(false);
-
-								// 		// If login successful, redirecting to home
-								// 		if (res) {
-								// 			console.log("login successful");
-								// 			history.push("/");
-								// 		}
-								// 	})
-								// 	.catch((err) => {
-								// 		// TODO: should display an error alert if there's an error.
-								// 		setIsLoading(false);
-								// 	});
 							}}
 						>
 							Register
