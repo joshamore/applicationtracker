@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
 	root: {
-		width: 230,
+		width: 250,
 		margin: 10,
 	},
 	title: {

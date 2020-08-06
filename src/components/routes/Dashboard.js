@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Container from "@material-ui/core/Container";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import Appbar from "../Appbar";
 import JobCard from "../JobCard";
 import Spinner from "../Spinner";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+	centerGrid: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		justify: "center",
+		spacing: 0,
+	},
+	headerSpace: {
+		marginTop: "0.5em",
+	},
+});
 
 export default function Dashboard() {
+	const classes = useStyles();
+
 	// Creating state
 	const [gettingJobs, setgettingJobs] = useState(true);
 	const [jobApplications, setjobApplications] = useState([]);
@@ -70,7 +86,15 @@ export default function Dashboard() {
 			<div>
 				<Appbar />
 				<Container maxWidth={false}>
-					<h1>Job Applications</h1>
+					<Typography
+						gutterBottom={true}
+						variant="h4"
+						component="h1"
+						align="center"
+						className={classes.headerSpace}
+					>
+						Job Applications
+					</Typography>
 					<Spinner />
 				</Container>
 			</div>
@@ -82,10 +106,25 @@ export default function Dashboard() {
 			<div>
 				<Appbar />
 				<Container maxWidth={false}>
-					<h1>Job Applications</h1>
+					<Typography
+						gutterBottom={true}
+						variant="h4"
+						component="h1"
+						align="center"
+						className={classes.headerSpace}
+					>
+						Job Applications
+					</Typography>
 					<Grid container>
 						{jobApplications.map((application) => (
-							<Grid item xs={12} sm={6} md={3}>
+							<Grid
+								className={classes.centerGrid}
+								item
+								xs={12}
+								sm={6}
+								md={4}
+								lg={3}
+							>
 								<JobCard
 									jobTitle={application.jobTitle}
 									company={application.company}
