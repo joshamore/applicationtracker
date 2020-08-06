@@ -13,6 +13,8 @@ import Spinner from "../Spinner";
 import { useHistory, useLocation } from "react-router-dom";
 import Alert from "../Alert";
 
+import AuthlessAppbar from "./../AuthlessAppbar";
+
 import Auth from "../../helpers/Auth";
 
 // Inspired by: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
@@ -129,106 +131,111 @@ export default function Login() {
 	// Default render
 	if (!isLoading) {
 		return (
-			<Container component="main" maxWidth="xs">
-				{isAlert ? (
-					<Alert
-						severity={alertSeverity}
-						alertMessage={alertMessage}
-						setAlert={setIsAlert}
-					/>
-				) : (
-					<div></div>
-				)}
-				<CssBaseline />
-				<div className={classes.paper}>
-					<Typography component="h2" variant="h5">
-						Log In
-					</Typography>
-					<form className={classes.form} noValidate>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							id="email"
-							label="Email Address"
-							name="email"
-							autoComplete="email"
-							autoFocus
-							onChange={(e) => setEmail(e.target.value)}
+			<div>
+				<AuthlessAppbar setEmail={setEmail} setPassword={setPassword} />
+				<Container component="main" maxWidth="xs">
+					{isAlert ? (
+						<Alert
+							severity={alertSeverity}
+							alertMessage={alertMessage}
+							setAlert={setIsAlert}
 						/>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							name="password"
-							label="Password"
-							type="password"
-							id="password"
-							autoComplete="current-password"
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-						<FormControlLabel
-							control={<Checkbox value="remember" color="primary" />}
-							label="Remember me"
-						/>
-						<Button
-							fullWidth
-							variant="contained"
-							color="primary"
-							className={classes.submit}
-							onClick={(e) => {
-								// Attempting to login if validation of form passes
-								if (validateLoginForm()) {
-									// Setting loading spinner
-									setIsLoading(true);
+					) : (
+						<div></div>
+					)}
+					<CssBaseline />
+					<div className={classes.paper}>
+						<Typography component="h2" variant="h5">
+							Log In
+						</Typography>
+						<form className={classes.form} noValidate>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								id="email"
+								label="Email Address"
+								name="email"
+								value={email}
+								autoComplete="email"
+								autoFocus
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								value={password}
+								name="password"
+								label="Password"
+								type="password"
+								id="password"
+								autoComplete="current-password"
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<FormControlLabel
+								control={<Checkbox value="remember" color="primary" />}
+								label="Remember me"
+							/>
+							<Button
+								fullWidth
+								variant="contained"
+								color="primary"
+								className={classes.submit}
+								onClick={(e) => {
+									// Attempting to login if validation of form passes
+									if (validateLoginForm()) {
+										// Setting loading spinner
+										setIsLoading(true);
 
-									attemptLogin(email, password)
-										.then((res) => {
-											setIsLoading(false);
+										attemptLogin(email, password)
+											.then((res) => {
+												setIsLoading(false);
 
-											// If login successful, redirecting to home
-											if (res) {
-												console.log("login successful");
-												history.push("/");
-											} else {
-												setAlertMessage(
-													"😥 Error logging in. Are your email and password correct?"
-												);
+												// If login successful, redirecting to home
+												if (res) {
+													console.log("login successful");
+													history.push("/");
+												} else {
+													setAlertMessage(
+														"😥 Error logging in. Are your email and password correct?"
+													);
+													setAlertSeverity("error");
+													setIsAlert(true);
+
+													// LOGGIN ERROR
+													console.log(res);
+												}
+											})
+											.catch((err) => {
+												// If error, stopping spinner and displaying error.
+												setIsLoading(false);
+
+												setAlertMessage("😥 Error logging in");
 												setAlertSeverity("error");
 												setIsAlert(true);
 
 												// LOGGIN ERROR
-												console.log(res);
-											}
-										})
-										.catch((err) => {
-											// If error, stopping spinner and displaying error.
-											setIsLoading(false);
-
-											setAlertMessage("😥 Error logging in");
-											setAlertSeverity("error");
-											setIsAlert(true);
-
-											// LOGGIN ERROR
-											console.log(err);
-										});
-								}
-							}}
-						>
-							Log In
-						</Button>
-						<Grid container>
-							<Grid item>
-								<Link href="/register" variant="body2">
-									{"Don't have an account? Sign Up"}
-								</Link>
+												console.log(err);
+											});
+									}
+								}}
+							>
+								Log In
+							</Button>
+							<Grid container>
+								<Grid item>
+									<Link href="/register" variant="body2">
+										{"Don't have an account? Sign Up"}
+									</Link>
+								</Grid>
 							</Grid>
-						</Grid>
-					</form>
-				</div>
-			</Container>
+						</form>
+					</div>
+				</Container>
+			</div>
 		);
 	}
 
