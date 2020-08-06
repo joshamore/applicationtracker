@@ -33,7 +33,7 @@ export default function Job() {
 	const [jobTitle, setjobTitle] = useState("");
 	const [jobCompany, setjobCompany] = useState("");
 	const [jobLink, setjobLink] = useState("");
-	const [jobID, setjobID] = useState(location.id);
+	const [jobID] = useState(location.id);
 
 	// Creating error state
 	const [bad, setbad] = useState(false);
