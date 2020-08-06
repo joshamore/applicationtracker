@@ -68,6 +68,13 @@ export default function Login() {
 			}
 		});
 
+		// Pinging backend to warmup instance
+		fetch("https://amorejobmate.herokuapp.com/api/ping")
+			.then((ping) => {
+				console.log("Warm backend");
+			})
+			.catch((e) => console.log("Not warm"));
+
 		// Setting account creation alert state if needed
 		if (location.fromRegister !== undefined && location.fromRegister) {
 			setAlertMessage("Account creation successful! Please log in below 👇");
