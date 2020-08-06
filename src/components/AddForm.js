@@ -39,18 +39,21 @@ export default function AddForm() {
 
 		try {
 			// Submitting data
-			confirm = await fetch("http://localhost:5000/api/application/", {
-				method: "POST",
-				headers: {
-					"auth-token": token,
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					applicationtitle: jobTitle,
-					applicationemployer: jobCompany,
-					applicationlink: jobLink,
-				}),
-			});
+			confirm = await fetch(
+				"http://Jobmate-env-1.eba-hpgje7mm.us-east-1.elasticbeanstalk.com/api/application/",
+				{
+					method: "POST",
+					headers: {
+						"auth-token": token,
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						applicationtitle: jobTitle,
+						applicationemployer: jobCompany,
+						applicationlink: jobLink,
+					}),
+				}
+			);
 
 			confirm = await confirm.json();
 
