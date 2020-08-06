@@ -68,7 +68,13 @@ export default function MenuAppBar() {
 			<AppBar position="static">
 				<Toolbar>
 					<Typography onClick={toHome} variant="h6" className={classes.title}>
-						<span className={classes.pointy}>Application Tracker</span>
+						<span className={classes.pointy}>
+							{" "}
+							<span role="img" aria-label="briefcase emoji">
+								💼
+							</span>{" "}
+							JobMate
+						</span>
 					</Typography>
 					<div>
 						<MenuIcon

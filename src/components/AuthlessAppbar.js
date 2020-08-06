@@ -30,7 +30,10 @@ export default function AuthlesAppbar({ setEmail, setPassword }) {
 			<AppBar position="static">
 				<Toolbar>
 					<Typography variant="h6" className={classes.title}>
-						Application Tracker
+						<span role="img" aria-label="briefcase emoji">
+							💼
+						</span>{" "}
+						JobMate
 					</Typography>
 					<Button
 						variant="contained"
