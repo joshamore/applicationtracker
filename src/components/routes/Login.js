@@ -98,8 +98,6 @@ export default function Login() {
 	};
 
 	const attemptLogin = async (email, password) => {
-		// TODO: input validation and throw an alert
-
 		try {
 			// Attempting login
 			let loginConfirm = await fetch("http://localhost:5000/auth/login/", {
