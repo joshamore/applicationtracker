@@ -40,7 +40,7 @@ export default function AddForm() {
 		try {
 			// Submitting data
 			confirm = await fetch(
-				"http://Jobmate-env-1.eba-hpgje7mm.us-east-1.elasticbeanstalk.com/api/application/",
+				"https://amorejobmate.herokuapp.com/api/application/",
 				{
 					method: "POST",
 					headers: {

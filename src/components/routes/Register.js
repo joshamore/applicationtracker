@@ -126,7 +126,7 @@ export default function Register() {
 		try {
 			// Attempting login
 			let registerConfirm = await fetch(
-				"http://Jobmate-env-1.eba-hpgje7mm.us-east-1.elasticbeanstalk.com/auth/register/",
+				"https://amorejobmate.herokuapp.com/auth/register/",
 				{
 					method: "POST",
 					headers: {

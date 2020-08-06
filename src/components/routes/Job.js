@@ -50,7 +50,7 @@ export default function Job() {
 		try {
 			// Submitting update
 			confirm = await fetch(
-				"http://Jobmate-env-1.eba-hpgje7mm.us-east-1.elasticbeanstalk.com/api/application/",
+				"https://amorejobmate.herokuapp.com/api/application/",
 				{
 					method: "PUT",
 					headers: {
@@ -108,7 +108,7 @@ export default function Job() {
 				try {
 					// Getting application
 					application = await fetch(
-						`http://Jobmate-env-1.eba-hpgje7mm.us-east-1.elasticbeanstalk.com/api/application/?id=${jobID}`,
+						`https://amorejobmate.herokuapp.com/api/application/?id=${jobID}`,
 						{
 							method: "GET",
 							headers: {

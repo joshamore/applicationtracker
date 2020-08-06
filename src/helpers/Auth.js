@@ -22,7 +22,7 @@ class Auth {
 		try {
 			// Checking if JWT valid
 			let isValid = await fetch(
-				"http://Jobmate-env-1.eba-hpgje7mm.us-east-1.elasticbeanstalk.com/auth/check",
+				"https://amorejobmate.herokuapp.com/auth/check",
 				{
 					method: "GET",
 					headers: {
