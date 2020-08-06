@@ -21,13 +21,16 @@ class Auth {
 
 		try {
 			// Checking if JWT valid
-			let isValid = await fetch("http://localhost:5000/auth/check", {
-				method: "GET",
-				headers: {
-					"auth-token": token,
-					"Content-Type": "application/json",
-				},
-			});
+			let isValid = await fetch(
+				"http://Jobmate-env-1.eba-hpgje7mm.us-east-1.elasticbeanstalk.com/auth/check",
+				{
+					method: "GET",
+					headers: {
+						"auth-token": token,
+						"Content-Type": "application/json",
+					},
+				}
+			);
 
 			if (isValid.status !== 200) {
 				this.auth = false;

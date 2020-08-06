@@ -100,16 +100,19 @@ export default function Login() {
 	const attemptLogin = async (email, password) => {
 		try {
 			// Attempting login
-			let loginConfirm = await fetch("http://localhost:5000/auth/login/", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					email: email,
-					password: password,
-				}),
-			});
+			let loginConfirm = await fetch(
+				"http://Jobmate-env-1.eba-hpgje7mm.us-east-1.elasticbeanstalk.com/auth/login/",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password,
+					}),
+				}
+			);
 
 			// Adding JSON buffer to JS Object
 			loginConfirm = await loginConfirm.json();
