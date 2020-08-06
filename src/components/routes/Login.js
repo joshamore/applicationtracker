@@ -101,7 +101,7 @@ export default function Login() {
 		try {
 			// Attempting login
 			let loginConfirm = await fetch(
-				"http://Jobmate-env-1.eba-hpgje7mm.us-east-1.elasticbeanstalk.com/auth/login/",
+				"https://amorejobmate.herokuapp.com/auth/login/",
 				{
 					method: "POST",
 					headers: {

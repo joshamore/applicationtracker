@@ -45,7 +45,7 @@ export default function Dashboard() {
 			try {
 				// Getting applications
 				applications = await fetch(
-					"http://Jobmate-env-1.eba-hpgje7mm.us-east-1.elasticbeanstalk.com/api/application/all",
+					"https://amorejobmate.herokuapp.com/api/application/all",
 					{
 						method: "GET",
 						headers: {
