@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import LinearLoader from "../LinearLoader";
 import Appbar from "../Appbar";
 import EditDialogue from "../JobEditDialogue";
+import ApplicationItems from "../ApplicationItems";
 
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -49,22 +50,19 @@ export default function Job() {
 
 		try {
 			// Submitting update
-			confirm = await fetch(
-				"https://amorejobmate.herokuapp.com/api/application/",
-				{
-					method: "PUT",
-					headers: {
-						"Content-Type": "application/json",
-						"auth-token": token,
-					},
-					body: JSON.stringify({
-						id: jobID,
-						applicationtitle: updatedJob.jobTitle,
-						applicationemployer: updatedJob.jobCompany,
-						applicationlink: updatedJob.jobLink,
-					}),
-				}
-			);
+			confirm = await fetch("http://localhost:5000/api/application/", {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					"auth-token": token,
+				},
+				body: JSON.stringify({
+					id: jobID,
+					applicationtitle: updatedJob.jobTitle,
+					applicationemployer: updatedJob.jobCompany,
+					applicationlink: updatedJob.jobLink,
+				}),
+			});
 
 			confirm = await confirm.json();
 
@@ -108,7 +106,7 @@ export default function Job() {
 				try {
 					// Getting application
 					application = await fetch(
-						`https://amorejobmate.herokuapp.com/api/application/?id=${jobID}`,
+						`http://localhost:5000/api/application/?id=${jobID}`,
 						{
 							method: "GET",
 							headers: {
@@ -175,6 +173,10 @@ export default function Job() {
 						</Paper>
 					</Grid>
 				</Grid>
+
+				<div>
+					<ApplicationItems />
+				</div>
 			</div>
 		);
 	}
