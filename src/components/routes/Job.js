@@ -175,7 +175,7 @@ export default function Job() {
 				</Grid>
 
 				<div>
-					<ApplicationItems />
+					<ApplicationItems applicationID={jobID} />
 				</div>
 			</div>
 		);

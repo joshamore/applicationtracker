@@ -28,11 +28,10 @@ const ApplicationItems = ({ applicationID }) => {
 				);
 				items = await items.json();
 
-				// ISSUE HERE OR WITH MAP (ALSO CHECK BACKEND)
+				// TODO: Need real handling (maybe state to confirm if items received.)
 				if (items !== null) {
 					setApplicationItems(items);
-					console.log(applicationItems);
-					// setIsLoading(false);
+					setIsLoading(false);
 				} else {
 					// TODO: real handling
 					console.log("error:" + items);
