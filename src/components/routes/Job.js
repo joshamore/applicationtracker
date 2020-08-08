@@ -215,6 +215,8 @@ export default function Job() {
 						applicationID={jobID}
 						reloadItems={reloadItems}
 						itemReloadDone={itemReloadDone}
+						setIsError={setIsError}
+						setErrorMessage={setErrorMessage}
 					/>
 				</div>
 			</div>

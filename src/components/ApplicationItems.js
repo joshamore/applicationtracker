@@ -27,7 +27,13 @@ const useStyles = makeStyles({
 	},
 });
 
-const ApplicationItems = ({ applicationID, reloadItems, itemReloadDone }) => {
+const ApplicationItems = ({
+	applicationID,
+	reloadItems,
+	itemReloadDone,
+	setErrorMessage,
+	setIsError,
+}) => {
 	const classes = useStyles();
 
 	const [isLoading, setIsLoading] = useState(true);
@@ -55,7 +61,6 @@ const ApplicationItems = ({ applicationID, reloadItems, itemReloadDone }) => {
 			);
 			items = await items.json();
 
-			// TODO: Need real handling (maybe state to confirm if items received.)
 			if (items !== null) {
 				// Setting useDate of each item
 				items.map((item) => {
@@ -72,15 +77,28 @@ const ApplicationItems = ({ applicationID, reloadItems, itemReloadDone }) => {
 				setApplicationItems(items);
 
 				setIsLoading(false);
+			} else if (items === []) {
+				setIsLoading(false);
 			} else {
-				// TODO: real handling
 				console.log("error:" + items);
+
+				// setting parent error state
+				setErrorMessage("Unable to get items");
+				setIsError(true);
+
+				setIsLoading(false);
 			}
 		} catch (err) {
 			// TODO: real handling
 			console.log("error:" + err);
+
+			// setting parent error state
+			setErrorMessage("Unable to get items");
+			setIsError(true);
+
+			setIsLoading(false);
 		}
-	}, [applicationID]);
+	}, [applicationID, setErrorMessage, setIsError]);
 
 	// getting application items after pageload
 	useEffect(() => {
@@ -98,7 +116,7 @@ const ApplicationItems = ({ applicationID, reloadItems, itemReloadDone }) => {
 				<Spinner />
 			</div>
 		);
-	} else {
+	} else if (!isLoading && applicationItems !== []) {
 		return (
 			<Grid
 				container
@@ -136,6 +154,8 @@ const ApplicationItems = ({ applicationID, reloadItems, itemReloadDone }) => {
 				))}
 			</Grid>
 		);
+	} else {
+		return <div></div>;
 	}
 };
 
