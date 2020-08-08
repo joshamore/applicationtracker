@@ -64,6 +64,11 @@ export default function AddApplicationItem({ applicationID, newItemAdded }) {
 					// Closing dialog
 					setOpen(false);
 					setIsCreating(false);
+
+					// Wiping out state values after update
+					setItemTitle("");
+					setItemContent("");
+					setItemCreated("");
 				} else {
 					// TODO
 				}
