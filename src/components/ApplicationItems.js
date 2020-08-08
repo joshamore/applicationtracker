@@ -51,7 +51,7 @@ const ApplicationItems = ({
 		try {
 			// Getting application
 			items = await fetch(
-				`http://localhost:5000/api/application/item/all?id=${applicationID}`,
+				`https://amorejobmate.herokuapp.com/api/application/item/all?id=${applicationID}`,
 				{
 					method: "GET",
 					headers: {
