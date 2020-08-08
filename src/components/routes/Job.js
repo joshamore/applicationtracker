@@ -6,6 +6,7 @@ import Appbar from "../Appbar";
 import JobEditDialogue from "../JobEditDialogue";
 import ApplicationItems from "../ApplicationItems";
 import AddApplicationTitle from "../AddApplicationItem";
+import Alert from "../Alert";
 
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -40,6 +41,11 @@ export default function Job() {
 	// Creating error state
 	const [bad, setbad] = useState(false);
 	const [badMessage, setbadMessage] = useState("");
+
+	// Error states
+	// TODO: WTF is going on with bad? Prob refactorable into this
+	const [isError, setIsError] = useState(true);
+	const [errorMessage, setErrorMessage] = useState("meme");
 
 	// State to track item reload requirement for ApplicationItems
 	const [reloadItems, setReloadItems] = useState(false);
@@ -97,7 +103,7 @@ export default function Job() {
 			console.log(`Error POSTing data: ${err}`);
 
 			setbad(true);
-			setbadMessage("Error updating job :(");
+			setbadMessage("Error updating job 😢");
 
 			return "failed";
 		}
@@ -163,6 +169,18 @@ export default function Job() {
 		return (
 			<div>
 				<Appbar />
+				{isError ? (
+					<Container maxWidth="xs">
+						<Alert
+							severity="error"
+							alertMessage={errorMessage}
+							setAlert={setIsError}
+							noMargin={true}
+						/>
+					</Container>
+				) : (
+					""
+				)}
 
 				<Grid container justify="center">
 					<Grid item xs={9} sm={6}>
