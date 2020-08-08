@@ -2,7 +2,9 @@
 
 **Track your job applications from submission to landing your dream job!**
 
+<div align="center">
 <img src="./readme_assets/mockup-content.png">
+</div>
 
 ### What is this?
 
