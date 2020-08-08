@@ -112,7 +112,7 @@ const ApplicationItems = ({ applicationID }) => {
 									{Moment(application.useDate).format("DD/MM/YYYY")}
 								</Typography>
 								<Typography gutterBottom variant="h6" component="h2">
-									ITEM HEADING LONG LONG LONG LONG
+									{application.item_title}
 								</Typography>
 								{/* <Typography className={classes.pos} color="textSecondary">
 									TODO: USE FOR RECORD STATE CHANGE WHEN EXISTS
