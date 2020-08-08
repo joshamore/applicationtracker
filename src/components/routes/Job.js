@@ -3,7 +3,10 @@ import { useLocation } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import LinearLoader from "../LinearLoader";
 import Appbar from "../Appbar";
-import EditDialogue from "../JobEditDialogue";
+import JobEditDialogue from "../JobEditDialogue";
+import ApplicationItems from "../ApplicationItems";
+import AddApplicationTitle from "../AddApplicationItem";
+import Alert from "../Alert";
 
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -38,6 +41,23 @@ export default function Job() {
 	// Creating error state
 	const [bad, setbad] = useState(false);
 	const [badMessage, setbadMessage] = useState("");
+
+	// Error states
+	// TODO: WTF is going on with bad? Prob refactorable into this
+	const [isError, setIsError] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
+
+	// State to track item reload requirement for ApplicationItems
+	const [reloadItems, setReloadItems] = useState(false);
+
+	// Callback for AddApplicationItem after a new item has been added
+	const newItemAdded = () => {
+		setReloadItems(true);
+	};
+	// Callback for ApplicationItems after reloading new items
+	const itemReloadDone = () => {
+		setReloadItems(false);
+	};
 
 	// Update job state if changes have been made
 	async function jobUpdate(updatedJob) {
@@ -86,7 +106,7 @@ export default function Job() {
 			console.log(`Error POSTing data: ${err}`);
 
 			setbad(true);
-			setbadMessage("Error updating job :(");
+			setbadMessage("Error updating job 😢");
 
 			return "failed";
 		}
@@ -152,6 +172,18 @@ export default function Job() {
 		return (
 			<div>
 				<Appbar />
+				{isError ? (
+					<Container maxWidth="xs">
+						<Alert
+							severity="error"
+							alertMessage={errorMessage}
+							setAlert={setIsError}
+							noMargin={true}
+						/>
+					</Container>
+				) : (
+					""
+				)}
 
 				<Grid container justify="center">
 					<Grid item xs={9} sm={6}>
@@ -165,16 +197,33 @@ export default function Job() {
 							</p>
 							{jobLink !== null ? <a href={jobLink}>Job Posting</a> : ""}
 							<Grid container justify="center" className={classes.jobEdit}>
-								<EditDialogue
+								<JobEditDialogue
 									jobUpdate={jobUpdate}
 									old_jobTitle={jobTitle}
 									old_jobCompany={jobCompany}
 									old_jobLink={jobLink}
 								/>
+
+								<AddApplicationTitle
+									applicationID={jobID}
+									newItemAdded={newItemAdded}
+									setIsError={setIsError}
+									setErrorMessage={setErrorMessage}
+								/>
 							</Grid>
 						</Paper>
 					</Grid>
 				</Grid>
+
+				<div>
+					<ApplicationItems
+						applicationID={jobID}
+						reloadItems={reloadItems}
+						itemReloadDone={itemReloadDone}
+						setIsError={setIsError}
+						setErrorMessage={setErrorMessage}
+					/>
+				</div>
 			</div>
 		);
 	}
