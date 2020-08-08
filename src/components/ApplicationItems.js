@@ -1,8 +1,34 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "./Spinner";
-import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+
+// CARD STUFF
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+
+const useStyles = makeStyles({
+	itemCard: {
+		minWidth: 275,
+		maxWidth: 275,
+		marginTop: "3%",
+		marginBottom: "3%",
+	},
+
+	title: {
+		fontSize: 14,
+	},
+	pos: {
+		marginBottom: 12,
+	},
+});
 
 const ApplicationItems = ({ applicationID }) => {
+	const classes = useStyles();
+
 	// Setting state
 	const [isLoading, setIsLoading] = useState(true);
 	const [applicationItems, setApplicationItems] = useState([]);
@@ -30,7 +56,20 @@ const ApplicationItems = ({ applicationID }) => {
 
 				// TODO: Need real handling (maybe state to confirm if items received.)
 				if (items !== null) {
+					// Setting useDate of each item
+					items.map((item) => {
+						if (item.item_timestamp === null) {
+							item.useDate = item.item_created_timestamp;
+							return item;
+						} else {
+							item.useDate = item.item_timestamp;
+							return item;
+						}
+					});
+
+					// Setting item state
 					setApplicationItems(items);
+
 					setIsLoading(false);
 				} else {
 					// TODO: real handling
@@ -43,7 +82,7 @@ const ApplicationItems = ({ applicationID }) => {
 		}
 
 		fetchApplicationItems();
-	}, []);
+	}, [applicationID]);
 
 	if (isLoading) {
 		return (
@@ -53,13 +92,41 @@ const ApplicationItems = ({ applicationID }) => {
 		);
 	} else {
 		return (
-			<div>
+			<Grid
+				container
+				spacing={0}
+				direction="column"
+				alignItems="center"
+				justify="center"
+			>
 				{applicationItems.map((application) => (
-					<Paper>
-						<p>{application.item_content}</p>
-					</Paper>
+					<Grid item>
+						<Card className={classes.itemCard}>
+							<CardContent>
+								<Typography
+									className={classes.title}
+									color="textSecondary"
+									gutterBottom
+								>
+									THIS IS AN ITEM
+								</Typography>
+								<Typography gutterBottom variant="h6" component="h2">
+									{application.useDate}
+								</Typography>
+								<Typography className={classes.pos} color="textSecondary">
+									adjective
+								</Typography>
+								<Typography variant="body2" component="p">
+									{application.item_content}
+								</Typography>
+							</CardContent>
+							<CardActions>
+								<Button size="small">Learn More</Button>
+							</CardActions>
+						</Card>
+					</Grid>
 				))}
-			</div>
+			</Grid>
 		);
 	}
 };
