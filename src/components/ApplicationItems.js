@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Moment from "moment";
 import Spinner from "./Spinner";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -108,20 +109,20 @@ const ApplicationItems = ({ applicationID }) => {
 									color="textSecondary"
 									gutterBottom
 								>
-									THIS IS AN ITEM
+									{Moment(application.useDate).format("DD/MM/YYYY")}
 								</Typography>
 								<Typography gutterBottom variant="h6" component="h2">
-									{application.useDate}
+									ITEM HEADING LONG LONG LONG LONG
 								</Typography>
-								<Typography className={classes.pos} color="textSecondary">
-									adjective
-								</Typography>
+								{/* <Typography className={classes.pos} color="textSecondary">
+									TODO: USE FOR RECORD STATE CHANGE WHEN EXISTS
+								</Typography> */}
 								<Typography variant="body2" component="p">
 									{application.item_content}
 								</Typography>
 							</CardContent>
 							<CardActions>
-								<Button size="small">Learn More</Button>
+								<Button>Update</Button>
 							</CardActions>
 						</Card>
 					</Grid>
