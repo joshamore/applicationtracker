@@ -6,6 +6,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+	buttonBuffer: {
+		marginRight: 3,
+	},
+});
 
 export default function JobEditDialogue({
 	jobUpdate,
@@ -13,6 +20,8 @@ export default function JobEditDialogue({
 	old_jobCompany,
 	old_jobLink,
 }) {
+	const classes = useStyles();
+
 	const [open, setOpen] = useState(false);
 	const [jobTitle, setjobTitle] = useState(old_jobTitle);
 	const [jobCompany, setjobCompany] = useState(old_jobCompany);
@@ -39,7 +48,12 @@ export default function JobEditDialogue({
 
 	return (
 		<div>
-			<Button variant="contained" color="primary" onClick={handleClickOpen}>
+			<Button
+				className={classes.buttonBuffer}
+				variant="contained"
+				color="primary"
+				onClick={handleClickOpen}
+			>
 				Edit
 			</Button>
 			<Dialog
