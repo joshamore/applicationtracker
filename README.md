@@ -1,2 +1,5 @@
-# Application Tracker
-Track your job applications.
+# JobMate.work 💼
+
+## Track your job applications in the cloud
+
+### What is this?
