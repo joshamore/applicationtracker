@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Moment from "moment";
 import Spinner from "./Spinner";
 import Grid from "@material-ui/core/Grid";
@@ -27,63 +27,70 @@ const useStyles = makeStyles({
 	},
 });
 
-const ApplicationItems = ({ applicationID }) => {
+const ApplicationItems = ({ applicationID, reloadItems, itemReloadDone }) => {
 	const classes = useStyles();
 
-	// Setting state
 	const [isLoading, setIsLoading] = useState(true);
 	const [applicationItems, setApplicationItems] = useState([]);
 
+	// Fetch applications from DB and update state
+	const fetchApplicationItems = useCallback(async () => {
+		const token = localStorage.getItem("token");
+
+		setIsLoading(true);
+
+		// Store for application
+		let items;
+
+		try {
+			// Getting application
+			items = await fetch(
+				`http://localhost:5000/api/application/item/all?id=${applicationID}`,
+				{
+					method: "GET",
+					headers: {
+						"auth-token": token,
+					},
+				}
+			);
+			items = await items.json();
+
+			// TODO: Need real handling (maybe state to confirm if items received.)
+			if (items !== null) {
+				// Setting useDate of each item
+				items.map((item) => {
+					if (item.item_timestamp === null) {
+						item.useDate = item.item_created_timestamp;
+						return item;
+					} else {
+						item.useDate = item.item_timestamp;
+						return item;
+					}
+				});
+
+				// Setting item state
+				setApplicationItems(items);
+
+				setIsLoading(false);
+			} else {
+				// TODO: real handling
+				console.log("error:" + items);
+			}
+		} catch (err) {
+			// TODO: real handling
+			console.log("error:" + err);
+		}
+	}, [applicationID]);
+
 	// getting application items after pageload
 	useEffect(() => {
-		// ASYNC function to get application items
-		async function fetchApplicationItems() {
-			const token = localStorage.getItem("token");
-			// Store for application
-			let items;
-
-			try {
-				// Getting application
-				items = await fetch(
-					`http://localhost:5000/api/application/item/all?id=${applicationID}`,
-					{
-						method: "GET",
-						headers: {
-							"auth-token": token,
-						},
-					}
-				);
-				items = await items.json();
-
-				// TODO: Need real handling (maybe state to confirm if items received.)
-				if (items !== null) {
-					// Setting useDate of each item
-					items.map((item) => {
-						if (item.item_timestamp === null) {
-							item.useDate = item.item_created_timestamp;
-							return item;
-						} else {
-							item.useDate = item.item_timestamp;
-							return item;
-						}
-					});
-
-					// Setting item state
-					setApplicationItems(items);
-
-					setIsLoading(false);
-				} else {
-					// TODO: real handling
-					console.log("error:" + items);
-				}
-			} catch (err) {
-				// TODO: real handling
-				console.log("error:" + err);
-			}
-		}
-
 		fetchApplicationItems();
-	}, [applicationID]);
+
+		// If fetch was triggered by a new item, updating item reload in parent
+		if (reloadItems) {
+			itemReloadDone();
+		}
+	}, [fetchApplicationItems, reloadItems, itemReloadDone]);
 
 	if (isLoading) {
 		return (
