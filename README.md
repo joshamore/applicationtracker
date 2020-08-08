@@ -2,6 +2,6 @@
 
 **Track your job applications from submission to landing your dream job!**
 
-<img href="https://jobmate.work/static/mockup-frame-b9050674e8edc6198f7f43b91c8db7a6.png" />
-
 ### What is this?
+
+JobMate is a job application tracker. Eventually, this will be a complete application workflow allowing you to manage your job applications, track key actions (such as interviews), and generate reports based on responses (e.g 50% of applications from X month lead to an interview).
