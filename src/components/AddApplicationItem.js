@@ -8,7 +8,12 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import LinearLoader from "./LinearLoader";
 
-export default function AddApplicationItem({ applicationID, newItemAdded }) {
+export default function AddApplicationItem({
+	applicationID,
+	newItemAdded,
+	setErrorMessage,
+	setIsError,
+}) {
 	const [open, setOpen] = useState(false);
 	const [isCreating, setIsCreating] = useState(false);
 	const [itemTitle, setItemTitle] = useState("");
@@ -70,10 +75,26 @@ export default function AddApplicationItem({ applicationID, newItemAdded }) {
 					setItemContent("");
 					setItemCreated("");
 				} else {
-					// TODO
+					// Printing error
+					console.log(`ERROR ADDING ITEM:${item}`);
+
+					setErrorMessage("Unable to add item 😢");
+					setIsError(true);
+
+					// Closing dialog
+					setOpen(false);
+					setIsCreating(false);
 				}
 			} catch (err) {
-				// TODO
+				// Printing error
+				console.log(`ERROR ADDING ITEM:${err}`);
+
+				setErrorMessage("Unable to add item 😢");
+				setIsError(true);
+
+				// Closing dialog
+				setOpen(false);
+				setIsCreating(false);
 			}
 		}
 

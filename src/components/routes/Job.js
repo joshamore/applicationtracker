@@ -44,8 +44,8 @@ export default function Job() {
 
 	// Error states
 	// TODO: WTF is going on with bad? Prob refactorable into this
-	const [isError, setIsError] = useState(true);
-	const [errorMessage, setErrorMessage] = useState("meme");
+	const [isError, setIsError] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	// State to track item reload requirement for ApplicationItems
 	const [reloadItems, setReloadItems] = useState(false);
@@ -204,6 +204,8 @@ export default function Job() {
 								<AddApplicationTitle
 									applicationID={jobID}
 									newItemAdded={newItemAdded}
+									setIsError={setIsError}
+									setErrorMessage={setErrorMessage}
 								/>
 							</Grid>
 						</Paper>
