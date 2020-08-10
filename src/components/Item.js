@@ -3,7 +3,7 @@ import Card from "@material-ui/core/Card";
 import Moment from "moment";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+import UpdateApplicationItem from "./UpdateApplicationItem";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -23,32 +23,47 @@ const useStyles = makeStyles({
 	},
 });
 
-const Item = ({ itemData }) => {
+const Item = ({ itemData, setErrorMessage, setIsError, newItemAdded }) => {
 	const classes = useStyles();
+
+	// Setting item state
+	const [itemTitle, setItemTitle] = useState(itemData.item_title);
+	const [itemContent, setItemContent] = useState(itemData.item_content);
+	const [itemTimestamp, setItemTimestamp] = useState(itemData.useDate);
+	const [itemID, setItemID] = useState(itemData.item_id);
+	const [appID, setAppID] = useState(itemData.item_application);
 
 	return (
 		<div>
-			<Card className={classes.itemCard}>
+			<Card className={classes.itemCard} id={itemID}>
 				<CardContent>
 					<Typography
 						className={classes.title}
 						color="textSecondary"
 						gutterBottom
 					>
-						{Moment(itemData.useDate).format("DD/MM/YYYY")}
+						{Moment(itemTimestamp).format("DD/MM/YYYY")}
 					</Typography>
 					<Typography gutterBottom variant="h6" component="h2">
-						{itemData.item_title}
+						{itemTitle}
 					</Typography>
 					{/* <Typography className={classes.pos} color="textSecondary">
 									TODO: USE FOR RECORD STATE CHANGE WHEN EXISTS
 								</Typography> */}
 					<Typography variant="body2" component="p">
-						{itemData.item_content}
+						{itemContent}
 					</Typography>
 				</CardContent>
 				<CardActions>
-					<Button>Update</Button>
+					<UpdateApplicationItem
+						itemID={itemID}
+						applicationID={appID}
+						curTitle={itemTitle}
+						curContent={itemContent}
+						setErrorMessage={setErrorMessage}
+						setIsError={setIsError}
+						newItemAdded={newItemAdded}
+					/>
 				</CardActions>
 			</Card>
 		</div>

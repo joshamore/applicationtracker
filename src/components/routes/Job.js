@@ -219,6 +219,7 @@ export default function Job() {
 						itemReloadDone={itemReloadDone}
 						setIsError={setIsError}
 						setErrorMessage={setErrorMessage}
+						newItemAdded={newItemAdded}
 					/>
 				</div>
 			</div>

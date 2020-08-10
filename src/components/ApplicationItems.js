@@ -9,6 +9,7 @@ const ApplicationItems = ({
 	itemReloadDone,
 	setErrorMessage,
 	setIsError,
+	newItemAdded,
 }) => {
 	// Setting states
 	const [isLoading, setIsLoading] = useState(true);
@@ -102,7 +103,12 @@ const ApplicationItems = ({
 			>
 				{applicationItems.map((item) => (
 					<Grid item>
-						<Item itemData={item} />
+						<Item
+							itemData={item}
+							setErrorMessage={setErrorMessage}
+							setIsError={setIsError}
+							newItemAdded={newItemAdded}
+						/>
 					</Grid>
 				))}
 			</Grid>
