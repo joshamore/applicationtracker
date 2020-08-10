@@ -27,11 +27,11 @@ const Item = ({ itemData, setErrorMessage, setIsError, newItemAdded }) => {
 	const classes = useStyles();
 
 	// Setting item state
-	const [itemTitle, setItemTitle] = useState(itemData.item_title);
-	const [itemContent, setItemContent] = useState(itemData.item_content);
-	const [itemTimestamp, setItemTimestamp] = useState(itemData.useDate);
-	const [itemID, setItemID] = useState(itemData.item_id);
-	const [appID, setAppID] = useState(itemData.item_application);
+	const [itemTitle] = useState(itemData.item_title);
+	const [itemContent] = useState(itemData.item_content);
+	const [itemTimestamp] = useState(itemData.useDate);
+	const [itemID] = useState(itemData.item_id);
+	const [appID] = useState(itemData.item_application);
 
 	return (
 		<div>
