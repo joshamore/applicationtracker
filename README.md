@@ -26,6 +26,7 @@ _Looking for the backend code? [It's over here](https://github.com/joshamore/app
 
 #### Features in progess:
 
+- 🏗️ You can update a job application item.
 - 🏗️ You can delete a job application.
 - 🏗️ You can delete a job application item.
 - 🏗️ You can change the date of a job application.
