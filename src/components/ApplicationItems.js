@@ -36,6 +36,7 @@ const ApplicationItems = ({
 }) => {
 	const classes = useStyles();
 
+	// Setting states
 	const [isLoading, setIsLoading] = useState(true);
 	const [applicationItems, setApplicationItems] = useState([]);
 
