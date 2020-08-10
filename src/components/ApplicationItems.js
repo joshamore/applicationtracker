@@ -126,7 +126,7 @@ const ApplicationItems = ({
 				alignItems="center"
 				justify="center"
 			>
-				{applicationItems.map((application) => (
+				{applicationItems.map((item) => (
 					<Grid item>
 						<Card className={classes.itemCard}>
 							<CardContent>
@@ -135,16 +135,16 @@ const ApplicationItems = ({
 									color="textSecondary"
 									gutterBottom
 								>
-									{Moment(application.useDate).format("DD/MM/YYYY")}
+									{Moment(item.useDate).format("DD/MM/YYYY")}
 								</Typography>
 								<Typography gutterBottom variant="h6" component="h2">
-									{application.item_title}
+									{item.item_title}
 								</Typography>
 								{/* <Typography className={classes.pos} color="textSecondary">
 									TODO: USE FOR RECORD STATE CHANGE WHEN EXISTS
 								</Typography> */}
 								<Typography variant="body2" component="p">
-									{application.item_content}
+									{item.item_content}
 								</Typography>
 							</CardContent>
 							<CardActions>
