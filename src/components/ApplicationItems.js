@@ -1,31 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Moment from "moment";
 import Spinner from "./Spinner";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
-
-// CARD STUFF
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-
-const useStyles = makeStyles({
-	itemCard: {
-		minWidth: 275,
-		maxWidth: 275,
-		marginTop: "3%",
-		marginBottom: "3%",
-	},
-
-	title: {
-		fontSize: 14,
-	},
-	pos: {
-		marginBottom: 12,
-	},
-});
+import Item from "./Item";
 
 const ApplicationItems = ({
 	applicationID,
@@ -33,9 +9,9 @@ const ApplicationItems = ({
 	itemReloadDone,
 	setErrorMessage,
 	setIsError,
+	newItemAdded,
 }) => {
-	const classes = useStyles();
-
+	// Setting states
 	const [isLoading, setIsLoading] = useState(true);
 	const [applicationItems, setApplicationItems] = useState([]);
 
@@ -125,31 +101,14 @@ const ApplicationItems = ({
 				alignItems="center"
 				justify="center"
 			>
-				{applicationItems.map((application) => (
+				{applicationItems.map((item) => (
 					<Grid item>
-						<Card className={classes.itemCard}>
-							<CardContent>
-								<Typography
-									className={classes.title}
-									color="textSecondary"
-									gutterBottom
-								>
-									{Moment(application.useDate).format("DD/MM/YYYY")}
-								</Typography>
-								<Typography gutterBottom variant="h6" component="h2">
-									{application.item_title}
-								</Typography>
-								{/* <Typography className={classes.pos} color="textSecondary">
-									TODO: USE FOR RECORD STATE CHANGE WHEN EXISTS
-								</Typography> */}
-								<Typography variant="body2" component="p">
-									{application.item_content}
-								</Typography>
-							</CardContent>
-							<CardActions>
-								<Button>Update (NOT YET WORKING)</Button>
-							</CardActions>
-						</Card>
+						<Item
+							itemData={item}
+							setErrorMessage={setErrorMessage}
+							setIsError={setIsError}
+							newItemAdded={newItemAdded}
+						/>
 					</Grid>
 				))}
 			</Grid>

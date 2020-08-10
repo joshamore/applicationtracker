@@ -5,7 +5,7 @@ import LinearLoader from "../LinearLoader";
 import Appbar from "../Appbar";
 import JobEditDialogue from "../JobEditDialogue";
 import ApplicationItems from "../ApplicationItems";
-import AddApplicationTitle from "../AddApplicationItem";
+import AddApplicationItem from "../AddApplicationItem";
 import Alert from "../Alert";
 
 import Grid from "@material-ui/core/Grid";
@@ -204,7 +204,7 @@ export default function Job() {
 									old_jobLink={jobLink}
 								/>
 
-								<AddApplicationTitle
+								<AddApplicationItem
 									applicationID={jobID}
 									newItemAdded={newItemAdded}
 									setIsError={setIsError}
@@ -222,6 +222,7 @@ export default function Job() {
 						itemReloadDone={itemReloadDone}
 						setIsError={setIsError}
 						setErrorMessage={setErrorMessage}
+						newItemAdded={newItemAdded}
 					/>
 				</div>
 			</div>
