@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Home from "./components/routes/Home";
@@ -8,8 +8,15 @@ import Job from "./components/routes/Job";
 import Login from "./components/routes/Login";
 import Register from "./components/routes/Register";
 import { ProtectedRoute } from "./helpers/ProtectedRoute";
+import ReactGA from "react-ga";
 
 function App() {
+	// Initialising google analytics
+	useEffect(() => {
+		ReactGA.initialize("UA-174882746-2");
+		ReactGA.pageview(window.location.pathname);
+	}, []);
+
 	return (
 		<BrowserRouter>
 			<Switch>
