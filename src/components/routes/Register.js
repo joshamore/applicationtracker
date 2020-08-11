@@ -126,7 +126,7 @@ export default function Register() {
 		try {
 			// Attempting login
 			let registerConfirm = await fetch(
-				"http://localhost:5000/auth/register/",
+				"https://amorejobmate.herokuapp.com/auth/register/",
 				{
 					method: "POST",
 					headers: {

@@ -45,7 +45,7 @@ export default function Dashboard() {
 			try {
 				// Getting applications
 				applications = await fetch(
-					"http://localhost:5000/api/application/all",
+					"https://amorejobmate.herokuapp.com/api/application/all",
 					{
 						method: "GET",
 						headers: {
