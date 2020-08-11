@@ -16,7 +16,11 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function DeleteJob({ applicationID }) {
+export default function DeleteJob({
+	applicationID,
+	setIsError,
+	setErrorMessage,
+}) {
 	const classes = useStyles();
 
 	// Hook used for redirect
@@ -64,14 +68,18 @@ export default function DeleteJob({ applicationID }) {
 				// Redirecting to dashboard after delete
 				history.push("/dashboard");
 			} else {
+				// If error, throwing to catch
 				throw Error(confirm.err);
 			}
 		} catch (err) {
-			// TODO: real error handling needed
-			console.log(
-				`ERROR DELETING APPLICATION: ${applicationID} ERROR:  ${err}`
-			);
+			// Logging error
+			console.log(`ERROR DELETING APPLICATION: ${applicationID} ERROR: ${err}`);
 
+			// Setting error handler
+			setErrorMessage("Unablet to delete job 😥");
+			setIsError(true);
+
+			// Closing delete
 			setIsDeleting(false);
 			setOpen(false);
 		}

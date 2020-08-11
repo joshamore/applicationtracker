@@ -209,7 +209,11 @@ export default function Job() {
 									setErrorMessage={setErrorMessage}
 								/>
 
-								<DeleteJob applicationID={jobID} />
+								<DeleteJob
+									applicationID={jobID}
+									setIsError={setIsError}
+									setErrorMessage={setErrorMessage}
+								/>
 							</Grid>
 						</Paper>
 					</Grid>
