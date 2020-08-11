@@ -51,7 +51,7 @@ export default function DeleteJob({
 		try {
 			// Attempting to delete application
 			confirm = await fetch(
-				`https://amorejobmate.herokuapp.com/api/application/?id=${applicationID}`,
+				`http://localhost:5000/api/application/?id=${applicationID}`,
 				{
 					method: "DELETE",
 					headers: {

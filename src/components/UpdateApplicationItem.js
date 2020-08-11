@@ -47,23 +47,20 @@ export default function UpdateApplicationItem({
 
 			try {
 				// Add application item
-				item = await fetch(
-					"https://amorejobmate.herokuapp.com/api/application/item",
-					{
-						method: "PUT",
-						headers: {
-							"Content-Type": "application/json",
-							"auth-token": token,
-						},
-						body: JSON.stringify({
-							itemID: itemID,
-							applicationID: applicationID,
-							itemContent: itemContent,
-							itemTitle: itemTitle,
-							itemTimestamp: itemCreated,
-						}),
-					}
-				);
+				item = await fetch("http://localhost:5000/api/application/item", {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+						"auth-token": token,
+					},
+					body: JSON.stringify({
+						itemID: itemID,
+						applicationID: applicationID,
+						itemContent: itemContent,
+						itemTitle: itemTitle,
+						itemTimestamp: itemCreated,
+					}),
+				});
 
 				item = await item.json();
 
