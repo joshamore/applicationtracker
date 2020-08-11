@@ -21,13 +21,13 @@ _Looking for the backend code? [It's over here](https://github.com/joshamore/app
 - ✅ You can log out.
 - ✅ You can add a job application (job title, company, and a link to the job posting).
 - ✅ You can update a job application.
-- ✅ You can add a job application item (e.g a note with information about the job application).
+- ✅ You can delete a job application.
 - ✅ You can view all added job applications.
+- ✅ You can add a job application item (e.g a note with information about the job application).
 - ✅ You can update a job application item.
 
 #### Features in progess:
 
-- 🏗️ You can delete a job application.
 - 🏗️ You can delete a job application item.
 - 🏗️ You can change the date of a job application.
 - 🏗️ You can set the status of a job application (e.g submitted, interview, rejection, etc).
