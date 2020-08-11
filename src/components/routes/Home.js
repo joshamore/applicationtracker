@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Appbar from "../Appbar";
+import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -12,6 +13,9 @@ const useStyles = makeStyles({
 	root: {
 		textAlign: "center",
 	},
+	headerSpace: {
+		marginTop: "0.5em",
+	},
 });
 
 export default function Home() {
@@ -22,7 +26,15 @@ export default function Home() {
 			<Appbar />
 			<div className={classes.root}>
 				<Container maxWidth="sm">
-					<h1>Application Tracker</h1>
+					<Typography
+						gutterBottom={true}
+						variant="h4"
+						component="h1"
+						align="center"
+						className={classes.headerSpace}
+					>
+						Job Applications
+					</Typography>
 					<p>Track your job application history and progress.</p>
 				</Container>
 				<Container maxWidth="sm">
