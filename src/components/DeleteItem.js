@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -16,15 +15,13 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function DeleteJob({
-	applicationID,
+export default function DeleteItem({
+	itemID,
 	setIsError,
 	setErrorMessage,
+	newItemAdded,
 }) {
 	const classes = useStyles();
-
-	// Hook used for redirect
-	let history = useHistory();
 
 	// Setting state
 	const [open, setOpen] = useState(false);
@@ -38,7 +35,7 @@ export default function DeleteJob({
 		setOpen(false);
 	};
 
-	const deleteJob = async () => {
+	const deleteItem = async () => {
 		// Setting loading state
 		setIsDeleting(true);
 
@@ -49,9 +46,9 @@ export default function DeleteJob({
 		const token = localStorage.getItem("token");
 
 		try {
-			// Attempting to delete application
+			// Attempting to delete application item
 			confirm = await fetch(
-				`https://amorejobmate.herokuapp.com/api/application/?id=${applicationID}`,
+				`https://amorejobmate.herokuapp.com/api/application/item/?id=${itemID}`,
 				{
 					method: "DELETE",
 					headers: {
@@ -65,18 +62,18 @@ export default function DeleteJob({
 				setIsDeleting(false);
 				setOpen(false);
 
-				// Redirecting to dashboard after delete
-				history.push("/dashboard");
+				// Reloading items after delete
+				newItemAdded();
 			} else {
 				// If error, throwing to catch
 				throw Error(confirm.err);
 			}
 		} catch (err) {
 			// Logging error
-			console.log(`ERROR DELETING APPLICATION: ${applicationID} ERROR: ${err}`);
+			console.log(`ERROR DELETING APPLICATION ITEM: ${itemID} ERROR: ${err}`);
 
 			// Setting error handler
-			setErrorMessage("Unablet to delete job 😥");
+			setErrorMessage("Unablet to delete item 😥");
 			setIsError(true);
 
 			// Closing delete
@@ -104,7 +101,7 @@ export default function DeleteJob({
 				>
 					<LinearLoader />
 					<DialogTitle id="form-dialog-title">
-						Delete Job Application
+						Delete Application Item
 					</DialogTitle>
 					<DialogContent>
 						<DialogContentText>
@@ -132,20 +129,20 @@ export default function DeleteJob({
 					aria-labelledby="form-dialog-title"
 				>
 					<DialogTitle id="form-dialog-title">
-						Delete Job Application
+						Delete Application Item
 					</DialogTitle>
 					<DialogContent>
 						<DialogContentText>
-							Clicking Yes below will remove this job application and all
-							related items. <strong>Are you sure</strong>?
+							Clicking Yes below will remove this application item.{" "}
+							<strong>Are you sure</strong>?
 						</DialogContentText>
 					</DialogContent>
 					<DialogActions>
 						<Button onClick={handleClose} color="primary">
-							No, keep my application
+							No, keep this item
 						</Button>
-						<Button onClick={deleteJob} color="secondary">
-							Yes, delete my application
+						<Button onClick={deleteItem} color="secondary">
+							Yes, delete this item
 						</Button>
 					</DialogActions>
 				</Dialog>

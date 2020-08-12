@@ -5,6 +5,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import UpdateApplicationItem from "./UpdateApplicationItem";
 import Typography from "@material-ui/core/Typography";
+import DeleteItem from "./DeleteItem";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -60,6 +61,12 @@ const Item = ({ itemData, setErrorMessage, setIsError, newItemAdded }) => {
 						applicationID={appID}
 						curTitle={itemTitle}
 						curContent={itemContent}
+						setErrorMessage={setErrorMessage}
+						setIsError={setIsError}
+						newItemAdded={newItemAdded}
+					/>
+					<DeleteItem
+						itemID={itemID}
 						setErrorMessage={setErrorMessage}
 						setIsError={setIsError}
 						newItemAdded={newItemAdded}
