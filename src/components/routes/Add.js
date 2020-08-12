@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import Appbar from "../Appbar";
+import Appbar from "../common/Appbar";
 import AddForm from "../AddForm";
 
 export default function Add() {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import LinearLoader from "../common/LinearLoader";
-import Appbar from "../Appbar";
+import Appbar from "../common/Appbar";
 import JobEditDialogue from "../JobEditDialogue";
 import ApplicationItems from "../ApplicationItems";
 import AddApplicationItem from "../AddApplicationItem";

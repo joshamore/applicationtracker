@@ -8,7 +8,7 @@ import AppsIcon from "@material-ui/icons/Apps";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { useHistory } from "react-router-dom";
-import Auth from "../helpers/Auth";
+import Auth from "../../helpers/Auth";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
