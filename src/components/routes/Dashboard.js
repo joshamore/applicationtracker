@@ -3,7 +3,7 @@ import Container from "@material-ui/core/Container";
 import { Grid, Typography } from "@material-ui/core";
 import Appbar from "../Appbar";
 import JobCard from "../JobCard";
-import Spinner from "../Spinner";
+import Spinner from "../common/Spinner";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Spinner from "./Spinner";
+import Spinner from "./common/Spinner";
 import Grid from "@material-ui/core/Grid";
 import Item from "./Item";
 
