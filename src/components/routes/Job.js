@@ -70,19 +70,22 @@ export default function Job() {
 
 		try {
 			// Submitting update
-			confirm = await fetch("http://localhost:5000/api/application/", {
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-					"auth-token": token,
-				},
-				body: JSON.stringify({
-					id: jobID,
-					applicationtitle: updatedJob.jobTitle,
-					applicationemployer: updatedJob.jobCompany,
-					applicationlink: updatedJob.jobLink,
-				}),
-			});
+			confirm = await fetch(
+				"https://amorejobmate.herokuapp.com/api/application/",
+				{
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+						"auth-token": token,
+					},
+					body: JSON.stringify({
+						id: jobID,
+						applicationtitle: updatedJob.jobTitle,
+						applicationemployer: updatedJob.jobCompany,
+						applicationlink: updatedJob.jobLink,
+					}),
+				}
+			);
 
 			confirm = await confirm.json();
 
@@ -126,7 +129,7 @@ export default function Job() {
 				try {
 					// Getting application
 					application = await fetch(
-						`http://localhost:5000/api/application/?id=${jobID}`,
+						`https://amorejobmate.herokuapp.com/api/application/?id=${jobID}`,
 						{
 							method: "GET",
 							headers: {

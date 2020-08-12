@@ -69,7 +69,7 @@ export default function Login() {
 		});
 
 		// Pinging backend to warmup instance
-		fetch("http://localhost:5000/api/ping")
+		fetch("https://amorejobmate.herokuapp.com/api/ping")
 			.then((ping) => {
 				console.log("Warm backend");
 			})
@@ -107,16 +107,19 @@ export default function Login() {
 	const attemptLogin = async (email, password) => {
 		try {
 			// Attempting login
-			let loginConfirm = await fetch("http://localhost:5000/auth/login/", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					email: email,
-					password: password,
-				}),
-			});
+			let loginConfirm = await fetch(
+				"https://amorejobmate.herokuapp.com/auth/login/",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password,
+					}),
+				}
+			);
 
 			// Adding JSON buffer to JS Object
 			loginConfirm = await loginConfirm.json();

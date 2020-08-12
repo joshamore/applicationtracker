@@ -48,7 +48,7 @@ export default function DeleteItem({
 		try {
 			// Attempting to delete application item
 			confirm = await fetch(
-				`http://localhost:5000/api/application/item/?id=${itemID}`,
+				`https://amorejobmate.herokuapp.com/api/application/item/?id=${itemID}`,
 				{
 					method: "DELETE",
 					headers: {
