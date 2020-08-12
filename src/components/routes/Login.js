@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Spinner from "../common/Spinner";
 import { useHistory, useLocation } from "react-router-dom";
-import Alert from "../Alert";
+import Alert from "../common/Alert";
 
 import AuthlessAppbar from "./../AuthlessAppbar";
 

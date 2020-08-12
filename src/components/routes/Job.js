@@ -6,7 +6,7 @@ import Appbar from "../Appbar";
 import JobEditDialogue from "../JobEditDialogue";
 import ApplicationItems from "../ApplicationItems";
 import AddApplicationItem from "../AddApplicationItem";
-import Alert from "../Alert";
+import Alert from "../common/Alert";
 import DeleteJob from "../DeleteJob";
 
 import Grid from "@material-ui/core/Grid";
