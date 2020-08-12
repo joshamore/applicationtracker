@@ -93,10 +93,8 @@ export default function DeleteJob({
 					className={classes.buttonBuffer}
 					variant="contained"
 					color="secondary"
-					size="small"
 					onClick={handleClickOpen}
 				>
-					Delete
 					<DeleteIcon />
 				</Button>
 				<Dialog
@@ -124,10 +122,8 @@ export default function DeleteJob({
 					className={classes.buttonBuffer}
 					variant="contained"
 					color="secondary"
-					size="small"
 					onClick={handleClickOpen}
 				>
-					Delete
 					<DeleteIcon />
 				</Button>
 				<Dialog
