@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(2),
 		marginBottom: "-10%",
 	},
+	gutterBottom: {
+		marginBottom: "18px",
+	},
 }));
 
 export default function Register() {
@@ -162,150 +165,156 @@ export default function Register() {
 	// Default render
 	if (!isLoading) {
 		return (
-			<Container component="main" maxWidth="xs">
-				{isError ? (
-					<div className={classes.alert}>
-						<Alert
-							severity="error"
-							onClose={() => {
-								setIsError(false);
-								setErrorMessage("");
-							}}
-						>
-							{errorMessage}
-						</Alert>
-					</div>
-				) : (
-					<div></div>
-				)}
+			<div>
+				<Container component="main" maxWidth="xs">
+					{isError ? (
+						<div className={classes.alert}>
+							<Alert
+								severity="error"
+								onClose={() => {
+									setIsError(false);
+									setErrorMessage("");
+								}}
+							>
+								{errorMessage}
+							</Alert>
+						</div>
+					) : (
+						<div></div>
+					)}
 
-				<CssBaseline />
-				<div className={classes.paper}>
-					<Typography component="h2" variant="h5">
-						Create New Account
-					</Typography>
-					<form className={classes.form} noValidate>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-							onChange={(e) => setFirstName(e.target.value)}
-						/>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							id="lastName"
-							label="Last Name"
-							name="lastName"
-							autoComplete="firstName"
-							onChange={(e) => setLastName(e.target.value)}
-						/>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							id="email"
-							label="Email Address"
-							name="email"
-							autoComplete="email"
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							name="password"
-							label="Password"
-							type="password"
-							id="password"
-							autoComplete="current-password"
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							name="passwordConfirm"
-							label="Confirm Password"
-							type="password"
-							id="passwordConfirm"
-							onChange={(e) => setPasswordConfirm(e.target.value)}
-						/>
-						<Button
-							fullWidth
-							variant="contained"
-							color="primary"
-							className={classes.submit}
-							onClick={(e) => {
-								if (validateFormData()) {
-									setIsLoading(true);
-									attemptRegister(email, password, firstName, lastName)
-										.then((confirm) => {
-											if (confirm) {
-												setIsLoading(false);
+					<CssBaseline />
+					<div className={classes.paper}>
+						<Typography component="h2" variant="h5">
+							Create New Account
+						</Typography>
+						<form className={classes.form} noValidate>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								id="firstName"
+								label="First Name"
+								name="firstName"
+								autoComplete="firstName"
+								autoFocus
+								onChange={(e) => setFirstName(e.target.value)}
+							/>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								id="lastName"
+								label="Last Name"
+								name="lastName"
+								autoComplete="firstName"
+								onChange={(e) => setLastName(e.target.value)}
+							/>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								id="email"
+								label="Email Address"
+								name="email"
+								autoComplete="email"
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								name="password"
+								label="Password"
+								type="password"
+								id="password"
+								autoComplete="current-password"
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								name="passwordConfirm"
+								label="Confirm Password"
+								type="password"
+								id="passwordConfirm"
+								onChange={(e) => setPasswordConfirm(e.target.value)}
+							/>
+							<Button
+								fullWidth
+								variant="contained"
+								color="primary"
+								className={classes.submit}
+								onClick={(e) => {
+									if (validateFormData()) {
+										setIsLoading(true);
+										attemptRegister(email, password, firstName, lastName)
+											.then((confirm) => {
+												if (confirm) {
+													setIsLoading(false);
 
-												// Redirecting to login
-												history.push({
-													pathname: "/login",
-													fromRegister: true,
-												});
-											} else {
+													// Redirecting to login
+													history.push({
+														pathname: "/login",
+														fromRegister: true,
+													});
+												} else {
+													setIsLoading(false);
+													setErrorMessage(
+														"Issue when creating your account 😢"
+													);
+													setIsError(true);
+												}
+											})
+											.catch((err) => {
 												setIsLoading(false);
 												setErrorMessage("Issue when creating your account 😢");
 												setIsError(true);
-											}
-										})
-										.catch((err) => {
-											setIsLoading(false);
-											setErrorMessage("Issue when creating your account 😢");
-											setIsError(true);
-										});
-								} else {
-									setIsLoading(false);
+											});
+									} else {
+										setIsLoading(false);
 
-									console.log("issue with input");
-								}
-							}}
-						>
-							Register
-						</Button>
-						<Grid container>
-							<Grid item>
-								<Link href="/login" variant="body2">
-									{"Already have an account? Log in"}
-								</Link>
+										console.log("issue with input");
+									}
+								}}
+							>
+								Register
+							</Button>
+							<Grid container>
+								<Grid item className={classes.gutterBottom}>
+									<Link href="/login" variant="body2">
+										{"Already have an account? Log in"}
+									</Link>
+								</Grid>
 							</Grid>
-						</Grid>
-					</form>
-				</div>
-			</Container>
+						</form>
+					</div>
+				</Container>
+			</div>
 		);
 	}
 
 	// Render if login
 	if (isLoading) {
 		return (
-			<Container component="main" maxWidth="xs">
-				<CssBaseline />
-				<div className={classes.paper}>
-					<Typography component="h2" variant="h5">
-						Registering
-					</Typography>
-				</div>
-				<div className={classes.spinnerSpace}></div>
-				<Spinner />
-			</Container>
+			<div>
+				<Container component="main" maxWidth="xs">
+					<CssBaseline />
+					<div className={classes.paper}>
+						<Typography component="h2" variant="h5">
+							Registering
+						</Typography>
+					</div>
+					<div className={classes.spinnerSpace}></div>
+					<Spinner />
+				</Container>
+			</div>
 		);
 	}
 }
