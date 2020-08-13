@@ -2,6 +2,7 @@ import React from "react";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ListIcon from "@material-ui/icons/List";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -106,15 +107,30 @@ export default function MenuAppBar() {
 						>
 							<MenuItem onClick={toAdd}>
 								<AddCircleOutlineIcon />
+								{"  "}
 								Add Application
 							</MenuItem>
 							<MenuItem onClick={toDashboard}>
 								<ListIcon />
+								{"  "}
 								All Applications
 							</MenuItem>
 							<MenuItem onClick={logout}>
 								<ExitToAppIcon />
+								{"  "}
 								Logout
+							</MenuItem>
+							<MenuItem>
+								<HelpOutlineIcon />
+								{"  "}
+								<a
+									href="https://jobmate.work/guide"
+									target="_blank"
+									rel="noopener noreferrer"
+									style={{ textDecoration: "none", color: "inherit" }}
+								>
+									Guide
+								</a>
 							</MenuItem>
 						</Menu>
 					</div>
