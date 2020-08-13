@@ -1,6 +1,6 @@
 # JobMate.work 💼 (frontend)
 
-**Track your job applications from submission to landing your dream job! [Try here.](https://app.workmate.work)**
+**Track your job applications from submission to landing your dream job! [Try here.](https://app.jobmate.work)**
 
 <div align="center">
 <img src="./readme_assets/mockup-content.png">
