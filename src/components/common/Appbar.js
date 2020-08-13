@@ -1,4 +1,7 @@
 import React from "react";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import ListIcon from "@material-ui/icons/List";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -101,9 +104,18 @@ export default function MenuAppBar() {
 							open={open}
 							onClose={handleClose}
 						>
-							<MenuItem onClick={toAdd}>Add Application</MenuItem>
-							<MenuItem onClick={toDashboard}>All Applications</MenuItem>
-							<MenuItem onClick={logout}>Logout</MenuItem>
+							<MenuItem onClick={toAdd}>
+								<AddCircleOutlineIcon />
+								Add Application
+							</MenuItem>
+							<MenuItem onClick={toDashboard}>
+								<ListIcon />
+								All Applications
+							</MenuItem>
+							<MenuItem onClick={logout}>
+								<ExitToAppIcon />
+								Logout
+							</MenuItem>
 						</Menu>
 					</div>
 				</Toolbar>
