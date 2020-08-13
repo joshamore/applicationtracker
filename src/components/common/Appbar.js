@@ -120,18 +120,18 @@ export default function MenuAppBar() {
 								{"  "}
 								Logout
 							</MenuItem>
-							<MenuItem>
-								<HelpOutlineIcon />
-								{"  "}
-								<a
-									href="https://jobmate.work/guide"
-									target="_blank"
-									rel="noopener noreferrer"
-									style={{ textDecoration: "none", color: "inherit" }}
-								>
+							<a
+								href="https://jobmate.work/guide"
+								target="_blank"
+								rel="noopener noreferrer"
+								style={{ textDecoration: "none", color: "inherit" }}
+							>
+								<MenuItem>
+									<HelpOutlineIcon />
+									{"  "}
 									Guide
-								</a>
-							</MenuItem>
+								</MenuItem>
+							</a>
 						</Menu>
 					</div>
 				</Toolbar>
