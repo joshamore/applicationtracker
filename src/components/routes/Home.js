@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Appbar from "../Appbar";
+import Appbar from "../common/Appbar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";

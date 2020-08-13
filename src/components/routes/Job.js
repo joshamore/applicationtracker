@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Container from "@material-ui/core/Container";
-import LinearLoader from "../LinearLoader";
-import Appbar from "../Appbar";
+import LinearLoader from "../common/LinearLoader";
+import Appbar from "../common/Appbar";
 import JobEditDialogue from "../JobEditDialogue";
 import ApplicationItems from "../ApplicationItems";
 import AddApplicationItem from "../AddApplicationItem";
-import Alert from "../Alert";
+import Alert from "../common/Alert";
 import DeleteJob from "../DeleteJob";
 
 import Grid from "@material-ui/core/Grid";
